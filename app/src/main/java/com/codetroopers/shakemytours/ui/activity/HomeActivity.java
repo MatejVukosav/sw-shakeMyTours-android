@@ -31,7 +31,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.codetroopers.shakemytours.R;
@@ -42,14 +41,24 @@ import com.codetroopers.shakemytours.util.ItemTouchHelperViewHolder;
 import com.codetroopers.shakemytours.util.OnStartDragListener;
 import com.codetroopers.shakemytours.util.ShakeDetector;
 import com.codetroopers.shakemytours.util.SimpleItemTouchHelperCallback;
-import com.codetroopers.shakemytours.util.TravelItemProvider;
+import com.codetroopers.shakemytours.util.TravelItemFactory;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import hugo.weaving.DebugLog;
+import timber.log.Timber;
 
 @DebugLog
 public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter.OnItemClickListener, OnStartDragListener {
@@ -81,6 +90,7 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
     private TravelRecyclerViewAdapter mTravelAdapter;
 
     private Boolean mFabVisible;
+    private boolean mIsShaking;
     private android.os.Handler mHandler = new android.os.Handler();
     private int mSelectedEvent = 0;
 
@@ -97,14 +107,17 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
         mShakeDetector = new ShakeDetector(new ShakeDetector.OnShakeListener() {
             @Override
             public void onShake() {
-                HomeActivity.this.onShake();
+                if (!mIsShaking) {
+                    mIsShaking = true;
+                    HomeActivity.this.onShake();
+                }
             }
         });
         setupRecyclerView();
         setFabVisible(false);
 
 //        FIXME remove for real run
-        onShake();
+//        onShake();
 
         mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,14 +125,38 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
                 startActivity(TripActivity.newIntent(HomeActivity.this));
             }
         });
+
+//        mFoodData = null;
+//        InputStream inputStream;
+//        BufferedReader reader = null;
+//        Gson gson = new GsonBuilder().create();
+//        try {
+//            inputStream = HomeActivity.this.getResources().openRawResource(R.raw.restaurants);
+//            reader = new BufferedReader(new InputStreamReader(inputStream));
+//
+//            final Type collectionType = new TypeToken<Collection<Travel>>() {
+//            }.getType();
+//            mFoodData = gson.fromJson(reader, collectionType);
+//        } catch (Exception e) {
+//            Timber.e(e, "");
+//        } finally {
+//            if (null != reader) {
+//                try {
+//                    reader.close();
+//                } catch (IOException e) {
+//                    Timber.e(e, "");
+//                }
+//            }
+//        }
+
     }
 
     private void onShake() {
         if (mTravelsDatas.isEmpty()) {
             mTelImg.setVisibility(View.GONE);
-
-            mShakeItTitle.setVisibility(View.INVISIBLE);
-            ViewCompat.animate(mShakeItTitle).alpha(0).setDuration(700).start();
+            mShakeItTitle.setText(R.string.shaking);
+//            mShakeItTitle.setVisibility(View.INVISIBLE);
+//            ViewCompat.animate(mShakeItTitle).alpha(0).setDuration(700).start();
 
             mTelImgAnim.setVisibility(View.VISIBLE);
             mTelImgAnim.setAnimation(AnimationUtils.loadAnimation(this, R.anim.pendulum));
@@ -140,32 +177,33 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
 
             @Override
             public void run() {
-
                 mDrawer.setBackgroundColor(getResources().getColor(R.color.white));
                 mTelImgAnim.clearAnimation();
                 mTelImgAnim.setVisibility(View.GONE);
                 mShakeItTitle.setVisibility(View.GONE);
                 mRecyclerView.setVisibility(View.VISIBLE);
                 if (mTravelsDatas.isEmpty()) {
-                    mTravelsDatas.add(0, TravelItemProvider.getMorning1());
-                    mTravelsDatas.add(1, TravelItemProvider.getLaunch());
-                    mTravelsDatas.add(2, TravelItemProvider.getAfternoon1());
-                    mTravelsDatas.add(3, TravelItemProvider.getAfternoon2());
-                    mTravelsDatas.add(4, TravelItemProvider.getSomething());
+                    mTravelsDatas.add(0, TravelItemFactory.getRandomFoodEvent(0));
+                    mTravelsDatas.add(1, TravelItemFactory.getRandomFoodEvent(1));
+                    mTravelsDatas.add(2, TravelItemFactory.getRandomFoodEvent(2));
+                    mTravelsDatas.add(3, TravelItemFactory.getRandomFoodEvent(3));
+                    mTravelsDatas.add(4, TravelItemFactory.getRandomFoodEvent(4));
                 } else {
                     for (int i = 0; i < mTravelsDatas.size(); i++) {
                         Travel travel = mTravelsDatas.get(i);
                         travel.loading = false;
                         if (!travel.selected) {
                             //Upadte my travel item
-                            mTravelsDatas.set(i, TravelItemProvider.getRandomTravel(i));
+                            mTravelsDatas.set(i, TravelItemFactory.getRandomFoodEvent(i));
                         }
                     }
                 }
                 mTravelAdapter.notifyDataSetChanged();
 
-                Toast.makeText(HomeActivity.this, "Votre journée est prête", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(HomeActivity.this, "Votre journée est prête", Toast.LENGTH_SHORT).show();
                 setTitle("Programme de la journée");
+
+                mIsShaking = false;
             }
         }, 2000);
     }
@@ -248,7 +286,7 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
     public boolean onPrepareOptionsMenu(Menu menu) {
         // If the nav drawer is open, hide action items related to the content view
         boolean drawerOpen = mDrawer.isDrawerOpen(mDrawerList);
-        menu.findItem(R.id.action_settings).setVisible(!drawerOpen);
+        menu.findItem(R.id.action_reset).setVisible(!drawerOpen);
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -261,7 +299,17 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
             case android.R.id.home:
                 mDrawer.openDrawer(GravityCompat.START);
                 return true;
-            case R.id.action_settings:
+            case R.id.action_reset:
+                mSelectedEvent = 0;
+                mTravelsDatas.clear();
+                mDrawerAdapter.notifyDataSetChanged();
+                mRecyclerView.setVisibility(View.GONE);
+                mTelImg.setVisibility(View.VISIBLE);
+                mShakeItTitle.setVisibility(View.VISIBLE);
+                mShakeItTitle.setAlpha(1);
+                mShakeItTitle.setText(R.string.shakeIt);
+                setFabVisible(false);
+                mDrawer.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -309,7 +357,8 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
                 holder.mBackgroundImageView.setVisibility(View.VISIBLE);
                 holder.mContent.setVisibility(View.VISIBLE);
                 holder.mTravelDestinationName.setText(currentItem.name);
-                Glide.with(HomeActivity.this).load(currentItem.backgroundImage).centerCrop().into(holder.mBackgroundImageView);
+                int backgroundImage = currentItem.backgroundImage;
+                Glide.with(HomeActivity.this).load(backgroundImage).centerCrop().into(holder.mBackgroundImageView);
             }
         }
 
@@ -322,12 +371,10 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
 
         @Override
         public void onItemDismiss(final int position) {
-
+            mValues.get(position).selected = false;
             final Travel remove = mValues.remove(position);
-
-            mTravelsDatas.add(position, new Travel().setName("Name New").setDistance("20km").setTarif("2€"));
+            mTravelsDatas.add(position, TravelItemFactory.getRandomFoodEvent(position));
             notifyItemChanged(position);
-
         }
 
         @Override

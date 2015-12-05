@@ -39,7 +39,7 @@
                 android:scaleType="centerCrop"
                 android:transitionName="openDetailImage"
                 android:visibility="gone"
-                tools:src="@drawable/cheese_1"
+                tools:src="@drawable/canoe"
                 tools:visibility="visible" />
 
             <LinearLayout
@@ -75,10 +75,11 @@
                     style="@style/Text.Title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textAlignment="center"
                     android:ellipsize="end"
-                    android:maxLines="1"
+                    android:maxLines="3"
                     android:transitionName="openDetailName"
-                    tools:text="Destination" />
+                    tools:text="Destinati v sdfgsdfg sdfg sdfgsdfg  sdf gsfdg sdqsdf qsdf sdon" />
             </LinearLayout>
         </RelativeLayout>
     </android.support.v7.widget.CardView>

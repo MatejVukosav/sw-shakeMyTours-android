@@ -27,6 +27,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.codetroopers.shakemytours.R;
@@ -50,6 +51,12 @@ public class TravelDetailActivity extends AppCompatActivity {
     ImageView phoneImage;
     @Bind(R.id.detail_travel_image_site)
     ImageView siteImage;
+    @Bind(R.id.detail_travel_location)
+    TextView locationText;
+    @Bind(R.id.detail_travel_phone)
+    TextView phoneText;
+    @Bind(R.id.detail_travel_site)
+    TextView siteText;
     @BindColor(R.color.colorPrimary)
     int primaryColor;
 
@@ -85,6 +92,7 @@ public class TravelDetailActivity extends AppCompatActivity {
         locationImage.setColorFilter(colorFilter);
         siteImage.setColorFilter(colorFilter);
         phoneImage.setColorFilter(colorFilter);
+        locationText.setText(travel.getAddress());
     }
 
     @Override
