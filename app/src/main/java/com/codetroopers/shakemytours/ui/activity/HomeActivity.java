@@ -25,6 +25,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -290,6 +291,8 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
         TextView mTravelTarif;
         @Bind(R.id.real_time_fragement_list_item_menu_button)
         ImageButton mMenuButton;
+        @Bind(R.id.travel_list_item_border)
+        LinearLayout border;
         private Travel travel;
 
         public TravelViewHolder(View itemView) {
@@ -306,10 +309,12 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
                     if (currentItem.selected) {
                         currentItem.selected = false;
                         mMenuButton.setColorFilter(null);
+                        border.setVisibility(View.GONE);
                     } else {
                         currentItem.selected = true;
                         int color = getResources().getColor(R.color.colorPrimary);
                         mMenuButton.setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.MULTIPLY));
+                        border.setVisibility(View.VISIBLE);
                     }
                 }
             });
