@@ -16,6 +16,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Random;
 
 @SuppressWarnings({"UnusedDeclaration", "UnusedReturnValue"})
 public class Strings {
@@ -204,5 +205,12 @@ public class Strings {
 
     public static String nextSessionId() {
         return new BigInteger(40, random).toString(32);
+    }
+
+    public static int randInt(int max) {
+        Random rand = new Random();
+        int randomNum = rand.nextInt((max - 1) + 1) + 0;
+
+        return randomNum;
     }
 }
