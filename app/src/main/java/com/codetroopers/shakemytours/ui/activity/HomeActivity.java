@@ -291,7 +291,7 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
             case R.id.action_reset:
                 mSelectedEvent = 0;
                 mTravelsDatas.clear();
-                mDrawerAdapter.notifyDataSetChanged();
+                mDrawerAdapter.notifyItemRangeRemoved(0, 5);
                 mRecyclerView.setVisibility(View.GONE);
                 mTelImg.setVisibility(View.VISIBLE);
                 mShakeItTitle.setVisibility(View.VISIBLE);
@@ -320,10 +320,9 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
     }
 
     public class TravelRecyclerViewAdapter extends RecyclerView.Adapter<TravelViewHolder> implements ItemTouchHelperAdapter {
-        List<Travel> mValues;
 
         public TravelRecyclerViewAdapter(List<Travel> allRealTime) {
-            mValues = allRealTime;
+            mTravelsDatas = allRealTime;
         }
 
         @Override
@@ -335,7 +334,7 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
         @Override
         public void onBindViewHolder(final TravelViewHolder holder, int position) {
 
-            Travel currentItem = mValues.get(position);
+            Travel currentItem = mTravelsDatas.get(position);
             holder.setTravel(currentItem);
             if (currentItem.loading) {
                 holder.mProgressBar.setVisibility(View.VISIBLE);
@@ -348,13 +347,16 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
                 holder.mTravelDestinationName.setText(currentItem.name);
                 int backgroundImage = currentItem.backgroundImage;
                 Glide.with(HomeActivity.this).load(backgroundImage).centerCrop().into(holder.mBackgroundImageView);
+                if(!currentItem.selected){
+                    holder.mMenuButton.setImageResource(android.R.color.transparent);
+                }
             }
         }
 
 
         @Override
         public int getItemCount() {
-            return mValues.size();
+            return mTravelsDatas.size();
         }
 
         @Override
@@ -364,8 +366,8 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
 
         @Override
         public void onItemDismiss(final int position) {
-            mValues.get(position).selected = false;
-            final Travel remove = mValues.remove(position);
+            mTravelsDatas.get(position).selected = false;
+            final Travel remove = mTravelsDatas.remove(position);
             mTravelsDatas.add(position, TravelItemFactory.getRandomFoodEvent(position));
             notifyItemChanged(position);
         }
