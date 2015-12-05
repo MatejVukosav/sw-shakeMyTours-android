@@ -10,6 +10,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -48,6 +49,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import hugo.weaving.DebugLog;
+import timber.log.Timber;
 
 @DebugLog
 public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter.OnItemClickListener, OnStartDragListener {
@@ -63,6 +65,8 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
     ProgressBar mProgressBar;
     @Bind(R.id.home_activity_recyclerview)
     RecyclerView mRecyclerView;
+    @Bind(R.id.real_time_fragment_fab)
+    FloatingActionButton mFloatingActionButton;
 
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerAdapter mDrawerAdapter;
@@ -74,7 +78,9 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
     private ItemTouchHelper mItemTouchHelper;
     private TravelRecyclerViewAdapter mTravelAdapter;
 
+    private Boolean mFabVisible;
     private android.os.Handler mHandler = new android.os.Handler();
+    private int mSelectedEvent = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,9 +99,17 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
             }
         });
         setupRecyclerView();
+        setFabVisible(false);
 
 //        FIXME remove for real run
 //        onShake();
+
+        mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(HomeActivity.this, "Goooooooo", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void onShake() {
@@ -105,7 +119,7 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
             mHomeTextview.setGravity(Gravity.CENTER);
             mProgressBar.setVisibility(View.VISIBLE);
             mRecyclerView.setVisibility(View.GONE);
-        }else{
+        } else {
             for (int i = 0; i < mTravelsDatas.size(); i++) {
                 Travel travel = mTravelsDatas.get(i);
                 if (!travel.selected) {
@@ -131,7 +145,7 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
                 } else {
                     for (int i = 0; i < mTravelsDatas.size(); i++) {
                         Travel travel = mTravelsDatas.get(i);
-                        travel.loading=false;
+                        travel.loading = false;
                         if (!travel.selected) {
                             //Upadte my travel item
                             mTravelsDatas.set(i, TravelItemProvider.getRandomTravel(i));
@@ -275,11 +289,11 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
 
             Travel currentItem = mValues.get(position);
             holder.setTravel(currentItem);
-            if(currentItem.loading){
+            if (currentItem.loading) {
                 holder.mProgressBar.setVisibility(View.VISIBLE);
                 holder.mBackgroundImageView.setVisibility(View.GONE);
                 holder.mContent.setVisibility(View.GONE);
-            }else {
+            } else {
                 holder.mProgressBar.setVisibility(View.GONE);
                 holder.mBackgroundImageView.setVisibility(View.VISIBLE);
                 holder.mContent.setVisibility(View.VISIBLE);
@@ -349,16 +363,20 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
                 @Override
                 public void onClick(View v) {
                     Travel currentItem = mTravelsDatas.get(getAdapterPosition());
+
                     if (currentItem.selected) {
+                        mSelectedEvent--;
                         currentItem.selected = false;
                         mMenuButton.setColorFilter(null);
                         border.setVisibility(View.GONE);
                     } else {
+                        mSelectedEvent++;
                         currentItem.selected = true;
                         int color = getResources().getColor(R.color.colorPrimary);
                         mMenuButton.setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.MULTIPLY));
                         border.setVisibility(View.VISIBLE);
                     }
+                    setFabVisible(mSelectedEvent > 0);
                 }
             });
         }
@@ -402,5 +420,18 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
         public Travel getTravel() {
             return travel;
         }
+    }
+
+    public void setFabVisible(boolean visible) {
+        if (mFabVisible == null || mFabVisible != visible) {
+            if (visible) {
+                mFloatingActionButton.setVisibility(View.VISIBLE);
+                mFloatingActionButton.animate().setDuration(200).translationY(0).alpha(1f);
+            } else {
+                final int height = mFloatingActionButton.getHeight();
+                mFloatingActionButton.animate().setDuration(200).translationY(height > 0 ? height : 128).alpha(0f);
+            }
+        }
+        mFabVisible = visible;
     }
 }
