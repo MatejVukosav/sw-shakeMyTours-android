@@ -25,6 +25,10 @@
             android:name=".ui.activity.TravelDetailActivity"
             android:label="@string/detail_title"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.TripActivity"
+            android:label="@string/detail_title"
+            android:screenOrientation="portrait" />
         <!--Uncomment to add crashlytics-->
         <!--<meta-data-->
         <!--android:name="com.crashlytics.ApiKey"-->

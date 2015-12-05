@@ -107,7 +107,7 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
         mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(HomeActivity.this, "Goooooooo", Toast.LENGTH_SHORT).show();
+                startActivity(TripActivity.newIntent(HomeActivity.this));
             }
         });
     }
