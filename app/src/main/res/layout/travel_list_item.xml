@@ -72,14 +72,15 @@
 
                     <ImageButton
                         android:id="@+id/real_time_fragement_list_item_menu_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="46dp"
+                        android:layout_height="46dp"
                         android:background="@drawable/circle_transparent"
-                        tools:src="@drawable/ic_check_circle" />
+                        tools:src="@drawable/ic_check_circle_white_big" />
 
                 </LinearLayout>
 
                 <TextView
+                    android:paddingLeft="16dp"
                     android:id="@+id/travel_list_item_name"
                     style="@style/Text.Title"
                     android:layout_width="wrap_content"

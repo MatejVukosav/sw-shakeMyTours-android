@@ -427,7 +427,7 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
                         mSelectedEvent++;
                         currentItem.selected = true;
                         int color = getResources().getColor(R.color.colorPrimary);
-                        mMenuButton.setImageResource(R.drawable.ic_check_circle);
+                        mMenuButton.setImageResource(R.drawable.ic_check_circle_white_big);
                         mMenuButton.setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.MULTIPLY));
                     }
                     setFabVisible(mSelectedEvent > 0);
