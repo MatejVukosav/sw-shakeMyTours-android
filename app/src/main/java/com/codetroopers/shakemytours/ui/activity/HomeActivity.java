@@ -73,13 +73,20 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
         mShakeDetector = new ShakeDetector(new ShakeDetector.OnShakeListener() {
             @Override
             public void onShake() {
-                Toast.makeText(HomeActivity.this, "Votre journée est prête", Toast.LENGTH_SHORT).show();
-                mHomeTextview.setVisibility(View.GONE);
-                mRecyclerView.setVisibility(View.VISIBLE);
-
-                setupRecyclerView(mRecyclerView);
+                HomeActivity.this.onShake();
             }
         });
+
+//        FIXME remove for real run
+        onShake();
+    }
+
+    private void onShake() {
+        Toast.makeText(HomeActivity.this, "Votre journée est prête", Toast.LENGTH_SHORT).show();
+        mHomeTextview.setVisibility(View.GONE);
+        mRecyclerView.setVisibility(View.VISIBLE);
+
+        setupRecyclerView(mRecyclerView);
     }
 
     private void setupRecyclerView(RecyclerView recyclerView) {
@@ -245,7 +252,7 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
     }
 
 
-    class TravelViewHolder extends RecyclerView.ViewHolder implements ItemTouchHelperViewHolder {
+    class TravelViewHolder extends RecyclerView.ViewHolder implements ItemTouchHelperViewHolder, View.OnClickListener {
         public final View mView;
         @Bind(R.id.travel_list_item_cardview)
         CardView mCardView;
@@ -262,6 +269,8 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
             super(itemView);
             ButterKnife.bind(this, itemView);
             mView = itemView;
+
+            mCardView.setOnClickListener(this);
         }
 
 
@@ -281,6 +290,11 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
                 mCardView.setCardElevation(6);
                 mCardView.setBackgroundColor(0xFFFAFAFA);
             }
+        }
+
+        @Override
+        public void onClick(View v) {
+            startActivity(TravelDetailActivity.newIntent(HomeActivity.this));
         }
     }
 }
