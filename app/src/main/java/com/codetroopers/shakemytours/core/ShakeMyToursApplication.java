@@ -22,7 +22,7 @@ public class ShakeMyToursApplication extends Application implements HasComponent
 
         initLoggers();
         Icepick.setDebug(BuildConfig.DEBUG);
-        LeakCanary.install(this);
+//        LeakCanary.install(this);
     }
 
     @Override
