@@ -13,7 +13,6 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.CardView;
@@ -42,23 +41,13 @@ import com.codetroopers.shakemytours.util.OnStartDragListener;
 import com.codetroopers.shakemytours.util.ShakeDetector;
 import com.codetroopers.shakemytours.util.SimpleItemTouchHelperCallback;
 import com.codetroopers.shakemytours.util.TravelItemFactory;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import hugo.weaving.DebugLog;
-import timber.log.Timber;
 
 @DebugLog
 public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter.OnItemClickListener, OnStartDragListener {
@@ -396,9 +385,9 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
         ImageView mBackgroundImageView;
         @Bind(R.id.travel_list_item_name)
         TextView mTravelDestinationName;
-        @Bind(R.id.real_time_fragement_list_item_menu_button_holder)
+        @Bind(R.id.travel_list_item_menu_button_holder)
         LinearLayout mButtonHolder;
-        @Bind(R.id.real_time_fragement_list_item_menu_button)
+        @Bind(R.id.travel_list_item_menu_button)
         ImageButton mMenuButton;
         @Bind(R.id.travel_list_item_progressbar)
         ProgressBar mProgressBar;
