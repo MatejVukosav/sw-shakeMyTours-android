@@ -19,15 +19,16 @@ package com.codetroopers.shakemytours.ui.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
-import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
 import com.codetroopers.shakemytours.R;
-import com.codetroopers.shakemytours.core.entities.Travel;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.MapsInitializer;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -35,11 +36,18 @@ import butterknife.ButterKnife;
 public class TripActivity extends AppCompatActivity {
 
 
-    public static Intent newIntent(Context context
-    ) {
+    public static Intent newIntent(Context context) {
         Intent intent = new Intent(context, TripActivity.class);
         return intent;
     }
+
+    @Bind(R.id.map_stops_fragment_mapview)
+    MapView mapView;
+    @Nullable
+    private GoogleMap map;
+    private BitmapDescriptor mSelectedMarker;
+    private BitmapDescriptor mDefaultMarker;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,8 +59,57 @@ public class TripActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        mapView.onCreate(savedInstanceState);
+        initMap();
+    }
+
+    private void initMap() {
+        // Gets to GoogleMap from the MapView and does initialization stuff
+        map = mapView.getMap();
+        if (map != null) {
+            map.setMyLocationEnabled(true);
+            map.getUiSettings().setMyLocationButtonEnabled(true);
+
+            // Needs to call MapsInitializer before doing any CameraUpdateFactory calls
+            MapsInitializer.initialize(this);
+            mSelectedMarker = BitmapDescriptorFactory.fromResource(R.drawable.ic_map_marker_selected);
+            mDefaultMarker = BitmapDescriptorFactory.fromResource(R.drawable.ic_map_marker);
+//            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(getLatitude(), getLongitude()), getInitZoom());
+//            map.moveCamera(cameraUpdate);
+        }
 
     }
 
+    @Override
+    public void onResume() {
+        if (mapView != null) {
+            mapView.onResume();
+        }
+        super.onResume();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mapView != null) {
+            mapView.onDestroy();
+        }
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        if (mapView != null) {
+            mapView.onLowMemory();
+        }
+    }
+
+    @Override
+    public void onPause() {
+        if (mapView != null) {
+            mapView.onPause();
+        }
+        super.onPause();
+    }
 
 }

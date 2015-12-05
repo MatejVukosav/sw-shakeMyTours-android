@@ -10,7 +10,7 @@ android {
     buildToolsVersion '23.0.2'
 
     defaultConfig {
-        applicationId "com.codetroopers.materialAndroidBootstrap"
+        applicationId "com.codetroopers.shakemytours"
         minSdkVersion 14
         targetSdkVersion 23
         versionCode 1
@@ -78,6 +78,7 @@ dependencies {
     compile 'com.github.frankiesardo:auto-parcel:' + autoparcelVersion
     compile 'frankiesardo:icepick:' + icepickVersion
 
+    compile 'com.google.android.gms:play-services-maps:8.3.0'
     compile 'com.github.bumptech.glide:glide:3.6.0'
 
     //Uncomment to add crashlytics

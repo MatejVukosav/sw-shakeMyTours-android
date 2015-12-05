@@ -103,7 +103,7 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
         setFabVisible(false);
 
 //        FIXME remove for real run
-//        onShake();
+        onShake();
 
         mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override

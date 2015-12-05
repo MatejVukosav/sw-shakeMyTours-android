@@ -18,12 +18,20 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/toolbar"
-            android:gravity="center_horizontal|center_vertical">
+            android:gravity="center_horizontal|center_vertical"
+            android:orientation="vertical">
 
-            <TextView
+            <com.google.android.gms.maps.MapView
+                android:id="@+id/map_stops_fragment_mapview"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Details" />
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <FrameLayout
+                android:id="@+id/details_container"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
         </LinearLayout>
     </RelativeLayout>
 
