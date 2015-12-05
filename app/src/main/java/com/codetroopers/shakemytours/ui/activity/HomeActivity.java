@@ -84,7 +84,7 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
         setupRecyclerView();
 
 //        FIXME remove for real run
-        onShake();
+//        onShake();
     }
 
     private void onShake() {
