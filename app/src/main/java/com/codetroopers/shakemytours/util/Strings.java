@@ -203,6 +203,6 @@ public class Strings {
     private static SecureRandom random = new SecureRandom();
 
     public static String nextSessionId() {
-        return new BigInteger(130, random).toString(32);
+        return new BigInteger(40, random).toString(32);
     }
 }

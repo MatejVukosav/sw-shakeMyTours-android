@@ -33,7 +33,7 @@ import com.codetroopers.shakemytours.util.ItemTouchHelperViewHolder;
 import com.codetroopers.shakemytours.util.OnStartDragListener;
 import com.codetroopers.shakemytours.util.ShakeDetector;
 import com.codetroopers.shakemytours.util.SimpleItemTouchHelperCallback;
-import com.codetroopers.shakemytours.util.Strings;
+import com.codetroopers.shakemytours.util.TravelItemProvider;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -93,16 +93,16 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
         mRecyclerView.setVisibility(View.VISIBLE);
 
         if (mTravelsDatas.isEmpty()) {
-            mTravelsDatas.add(new Travel().setName("Name1").setDistance("10km").setTarif("20€"));
-            mTravelsDatas.add(new Travel().setName("Name2").setDistance("50km").setTarif("10€"));
-            mTravelsDatas.add(new Travel().setName("Name3").setDistance("10km").setTarif("1000€"));
-            mTravelsDatas.add(new Travel().setName("Name4").setDistance("20km").setTarif("2€"));
+            mTravelsDatas.add(0, TravelItemProvider.getMorning1());
+            mTravelsDatas.add(1, TravelItemProvider.getLaunch());
+            mTravelsDatas.add(2, TravelItemProvider.getAfternoon1());
+            mTravelsDatas.add(3, TravelItemProvider.getAfternoon2());
         } else {
             for (int i = 0; i < mTravelsDatas.size(); i++) {
                 Travel travel = mTravelsDatas.get(i);
                 if (!travel.selected) {
                     //Upadte my travel item
-                    travel.name = Strings.nextSessionId();
+                    mTravelsDatas.set(i, TravelItemProvider.getRandomTravel(i));
                 }
             }
         }
