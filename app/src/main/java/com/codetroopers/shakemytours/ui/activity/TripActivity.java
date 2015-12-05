@@ -23,6 +23,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -31,6 +32,9 @@ import android.support.v7.widget.Toolbar;
 import com.codetroopers.shakemytours.R;
 import com.codetroopers.shakemytours.core.entities.Travel;
 import com.codetroopers.shakemytours.util.TravelItemFactory;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -49,7 +53,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class TripActivity extends AppCompatActivity {
+public class TripActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
 
     public static Intent newIntent(Context context) {
@@ -59,10 +63,15 @@ public class TripActivity extends AppCompatActivity {
 
     @Bind(R.id.map_stops_fragment_mapview)
     MapView mapView;
+
     int primaryColor;
     int accentColor;
+
     @Nullable
     private GoogleMap map;
+    @Nullable
+    private LatLng mLastLatLng;
+    private GoogleApiClient mGoogleApiClient;
 
 
     @Override
@@ -78,7 +87,23 @@ public class TripActivity extends AppCompatActivity {
         primaryColor = getResources().getColor(R.color.colorPrimary);
         accentColor = getResources().getColor(R.color.colorAccent);
         mapView.onCreate(savedInstanceState);
-        initMap();
+
+        buildGoogleApiClient();
+    }
+
+    protected synchronized void buildGoogleApiClient() {
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
+        mGoogleApiClient.connect();
+    }
+
+    @Override
+    protected void onStop() {
+        mGoogleApiClient.disconnect();
+        super.onStop();
     }
 
     private void initMap() {
@@ -106,6 +131,9 @@ public class TripActivity extends AppCompatActivity {
 
         ArrayList<LatLng> commuteLatLngPoints = new ArrayList<LatLng>();
         PolylineOptions polyLineOptions = new PolylineOptions();
+
+        commuteLatLngPoints.add(mLastLatLng);
+        boundsBuilder.include(mLastLatLng);
         for (int i = 0; i < fakeTravel.size(); i++) {
             Travel currentPoint = fakeTravel.get(i);
             //add point on cummute line
@@ -226,4 +254,21 @@ public class TripActivity extends AppCompatActivity {
         super.onPause();
     }
 
+    @Override
+    public void onConnected(Bundle bundle) {
+
+        Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+        mLastLatLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+        initMap();
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+
+    }
 }
