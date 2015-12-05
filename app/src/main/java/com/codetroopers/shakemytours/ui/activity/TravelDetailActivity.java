@@ -21,7 +21,6 @@ import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -34,7 +33,6 @@ import com.codetroopers.shakemytours.R;
 import com.codetroopers.shakemytours.core.entities.Travel;
 
 import butterknife.Bind;
-import butterknife.BindColor;
 import butterknife.ButterKnife;
 
 public class TravelDetailActivity extends AppCompatActivity {
@@ -57,8 +55,7 @@ public class TravelDetailActivity extends AppCompatActivity {
     TextView phoneText;
     @Bind(R.id.detail_travel_site)
     TextView siteText;
-    @BindColor(R.color.colorPrimary)
-    int primaryColor;
+
 
     public static Intent newIntent(Context context, Travel travel) {
         Intent intent = new Intent(context, TravelDetailActivity.class);
@@ -88,7 +85,7 @@ public class TravelDetailActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(travel.name);
 
         loadBackdrop(travel);
-        PorterDuffColorFilter colorFilter = new PorterDuffColorFilter(primaryColor, PorterDuff.Mode.MULTIPLY);
+        PorterDuffColorFilter colorFilter = new PorterDuffColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.MULTIPLY);
         locationImage.setColorFilter(colorFilter);
         siteImage.setColorFilter(colorFilter);
         phoneImage.setColorFilter(colorFilter);
