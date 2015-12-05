@@ -7,8 +7,10 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.math.BigInteger;
 import java.security.InvalidParameterException;
 import java.security.MessageDigest;
+import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
@@ -197,4 +199,10 @@ public class Strings {
         return namedFormat(str, map);
     }
 
+
+    private static SecureRandom random = new SecureRandom();
+
+    public static String nextSessionId() {
+        return new BigInteger(130, random).toString(32);
+    }
 }

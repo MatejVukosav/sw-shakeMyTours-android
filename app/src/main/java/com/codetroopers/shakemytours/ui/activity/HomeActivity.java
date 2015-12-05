@@ -3,7 +3,6 @@ package com.codetroopers.shakemytours.ui.activity;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Color;
-import android.graphics.ColorFilter;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.hardware.Sensor;
@@ -34,6 +33,7 @@ import com.codetroopers.shakemytours.util.ItemTouchHelperViewHolder;
 import com.codetroopers.shakemytours.util.OnStartDragListener;
 import com.codetroopers.shakemytours.util.ShakeDetector;
 import com.codetroopers.shakemytours.util.SimpleItemTouchHelperCallback;
+import com.codetroopers.shakemytours.util.Strings;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,13 +56,14 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
     RecyclerView mRecyclerView;
 
     private ActionBarDrawerToggle mDrawerToggle;
-    private DrawerAdapter mAdapter;
+    private DrawerAdapter mDrawerAdapter;
 
     private ShakeDetector mShakeDetector;
     private SensorManager mSensorManager;
     private Sensor mAccelerometer;
     private List<Travel> mTravelsDatas;
     private ItemTouchHelper mItemTouchHelper;
+    private TravelRecyclerViewAdapter mTravelAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +81,7 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
                 HomeActivity.this.onShake();
             }
         });
+        setupRecyclerView();
 
 //        FIXME remove for real run
         onShake();
@@ -90,25 +92,35 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
         mHomeTextview.setVisibility(View.GONE);
         mRecyclerView.setVisibility(View.VISIBLE);
 
-        setupRecyclerView(mRecyclerView);
+        if (mTravelsDatas.isEmpty()) {
+            mTravelsDatas.add(new Travel().setName("Name1").setDistance("10km").setTarif("20€"));
+            mTravelsDatas.add(new Travel().setName("Name2").setDistance("50km").setTarif("10€"));
+            mTravelsDatas.add(new Travel().setName("Name3").setDistance("10km").setTarif("1000€"));
+            mTravelsDatas.add(new Travel().setName("Name4").setDistance("20km").setTarif("2€"));
+        } else {
+            for (int i = 0; i < mTravelsDatas.size(); i++) {
+                Travel travel = mTravelsDatas.get(i);
+                if (!travel.selected) {
+                    //Upadte my travel item
+                    travel.name = Strings.nextSessionId();
+                }
+            }
+        }
+        mTravelAdapter.notifyDataSetChanged();
+
     }
 
-    private void setupRecyclerView(RecyclerView recyclerView) {
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    private void setupRecyclerView() {
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mTravelsDatas = new ArrayList<>();
-        TravelRecyclerViewAdapter adapter = new TravelRecyclerViewAdapter(mTravelsDatas);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setHasFixedSize(true);
-        mTravelsDatas.add(new Travel().setName("Name1").setDistance("10km").setTarif("20€"));
-        mTravelsDatas.add(new Travel().setName("Name2").setDistance("50km").setTarif("10€"));
-        mTravelsDatas.add(new Travel().setName("Name3").setDistance("10km").setTarif("1000€"));
-        mTravelsDatas.add(new Travel().setName("Name4").setDistance("20km").setTarif("2€"));
-
+        mTravelAdapter = new TravelRecyclerViewAdapter(mTravelsDatas);
+        mRecyclerView.setAdapter(mTravelAdapter);
+        mRecyclerView.setHasFixedSize(true);
 
         //setup swipe to delete and drag'n'drop
-        ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(adapter);
+        ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(mTravelAdapter);
         mItemTouchHelper = new ItemTouchHelper(callback);
-        mItemTouchHelper.attachToRecyclerView(recyclerView);
+        mItemTouchHelper.attachToRecyclerView(mRecyclerView);
     }
 
     @Override
@@ -124,9 +136,9 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
     }
 
     private void setupDrawer() {
-        mAdapter = new DrawerAdapter(this);
+        mDrawerAdapter = new DrawerAdapter(this);
 
-        mDrawerList.setAdapter(mAdapter);
+        mDrawerList.setAdapter(mDrawerAdapter);
         // improve performance by indicating the list if fixed size.
         mDrawerList.setHasFixedSize(true);
         mDrawerList.setLayoutManager(new LinearLayoutManager(this));
@@ -202,7 +214,7 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
 
     private void selectItem(int position) {
         mDrawer.closeDrawer(mDrawerList);
-        mAdapter.setActive(position);
+        mDrawerAdapter.setActive(position);
     }
 
     @Override
