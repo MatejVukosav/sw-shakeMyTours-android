@@ -25,6 +25,7 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.Parcel;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -258,7 +259,11 @@ public class TripActivity extends AppCompatActivity implements GoogleApiClient.C
     public void onConnected(Bundle bundle) {
 
         Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-        mLastLatLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+        if(mLastLocation == null){
+            mLastLatLng = new LatLng(47.400542, 0.685327);
+        }else {
+            mLastLatLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+        }
         initMap();
     }
 
