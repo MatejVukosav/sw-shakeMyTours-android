@@ -302,8 +302,6 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
                 holder.mBackgroundImageView.setVisibility(View.VISIBLE);
                 holder.mContent.setVisibility(View.VISIBLE);
                 holder.mTravelDestinationName.setText(currentItem.name);
-                holder.mTravelTarif.setText(currentItem.tarif);
-                holder.mTravelDistance.setText(currentItem.distance);
                 Glide.with(HomeActivity.this).load(currentItem.backgroundImage).centerCrop().into(holder.mBackgroundImageView);
             }
         }
@@ -340,12 +338,6 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
         ImageView mBackgroundImageView;
         @Bind(R.id.travel_list_item_name)
         TextView mTravelDestinationName;
-        @Bind(R.id.travel_list_item_details)
-        TextView mTravelDetails;
-        @Bind(R.id.travel_list_item_distance)
-        TextView mTravelDistance;
-        @Bind(R.id.travel_list_item_tarif)
-        TextView mTravelTarif;
         @Bind(R.id.real_time_fragement_list_item_menu_button)
         ImageButton mMenuButton;
         @Bind(R.id.travel_list_item_border)
