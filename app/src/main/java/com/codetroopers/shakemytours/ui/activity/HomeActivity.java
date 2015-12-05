@@ -159,6 +159,7 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
                 mTravelAdapter.notifyDataSetChanged();
 
                 Toast.makeText(HomeActivity.this, "Votre journée est prête", Toast.LENGTH_SHORT).show();
+                setTitle("Programme de la journée");
             }
         }, 2000);
     }
