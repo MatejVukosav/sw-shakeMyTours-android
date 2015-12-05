@@ -86,6 +86,7 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
     private android.os.Handler mHandler = new android.os.Handler();
     private int mSelectedEvent = 0;
     private MediaPlayer mp;
+    private Boolean soundEnable = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,6 +112,7 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
 
 //        FIXME remove for real run
 //        onShake();
+        soundEnable = false;
 
         mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -154,9 +156,8 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
             mTelImgAnim.setVisibility(View.VISIBLE);
             mTelImgAnim.setAnimation(AnimationUtils.loadAnimation(this, R.anim.pendulum));
             mTelImgAnim.animate();
-            mp = MediaPlayer.create(getApplicationContext(), R.raw.maracas);
-            mp.setLooping(true);
-            mp.start();
+
+            playMaracas();
             mRecyclerView.setVisibility(View.GONE);
         } else {
             for (int i = 0; i < mTravelsDatas.size(); i++) {
@@ -173,7 +174,7 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
 
             @Override
             public void run() {
-                mp.stop();
+                stopMaracas();
                 mDrawer.setBackgroundColor(getResources().getColor(R.color.white));
                 mTelImgAnim.clearAnimation();
                 mTelImgAnim.setVisibility(View.GONE);
@@ -203,6 +204,20 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
                 mIsShaking = false;
             }
         }, 2000);
+    }
+
+    private void stopMaracas() {
+        if(soundEnable) {
+            mp.stop();
+        }
+    }
+
+    private void playMaracas() {
+        if(soundEnable) {
+            mp = MediaPlayer.create(getApplicationContext(), R.raw.maracas);
+            mp.setLooping(true);
+            mp.start();
+        }
     }
 
     private void setupRecyclerView() {
