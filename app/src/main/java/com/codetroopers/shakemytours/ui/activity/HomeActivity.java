@@ -8,6 +8,7 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -84,6 +85,7 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
     private boolean mIsShaking;
     private android.os.Handler mHandler = new android.os.Handler();
     private int mSelectedEvent = 0;
+    private MediaPlayer mp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -152,6 +154,9 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
             mTelImgAnim.setVisibility(View.VISIBLE);
             mTelImgAnim.setAnimation(AnimationUtils.loadAnimation(this, R.anim.pendulum));
             mTelImgAnim.animate();
+            mp = MediaPlayer.create(getApplicationContext(), R.raw.maracas);
+            mp.setLooping(true);
+            mp.start();
             mRecyclerView.setVisibility(View.GONE);
         } else {
             for (int i = 0; i < mTravelsDatas.size(); i++) {
@@ -168,6 +173,7 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
 
             @Override
             public void run() {
+                mp.stop();
                 mDrawer.setBackgroundColor(getResources().getColor(R.color.white));
                 mTelImgAnim.clearAnimation();
                 mTelImgAnim.setVisibility(View.GONE);
