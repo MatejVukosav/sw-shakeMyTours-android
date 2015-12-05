@@ -81,6 +81,7 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
     private TravelRecyclerViewAdapter mTravelAdapter;
 
     private Boolean mFabVisible;
+    private boolean mIsShaking;
     private android.os.Handler mHandler = new android.os.Handler();
     private int mSelectedEvent = 0;
 
@@ -97,7 +98,10 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
         mShakeDetector = new ShakeDetector(new ShakeDetector.OnShakeListener() {
             @Override
             public void onShake() {
-                HomeActivity.this.onShake();
+                if (!mIsShaking) {
+                    mIsShaking = true;
+                    HomeActivity.this.onShake();
+                }
             }
         });
         setupRecyclerView();
@@ -165,6 +169,8 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
 
                 Toast.makeText(HomeActivity.this, "Votre journée est prête", Toast.LENGTH_SHORT).show();
                 setTitle("Programme de la journée");
+
+                mIsShaking = false;
             }
         }, 2000);
     }
