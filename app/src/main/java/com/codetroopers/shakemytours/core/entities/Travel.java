@@ -12,6 +12,7 @@ public class Travel implements Parcelable{
     public boolean selected;
     @DrawableRes
     public int backgroundImage;
+    public boolean loading;
 
     public Travel() {
     }

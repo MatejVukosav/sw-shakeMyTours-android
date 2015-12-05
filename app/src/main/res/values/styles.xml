@@ -64,4 +64,10 @@
         <item name="android:textColor">@color/colorPrimary</item>
     </style>
 
+    <style name="Widget.ProgressBar" parent="@style/Widget.AppCompat.ProgressBar">
+        <item name="android:maxHeight">@dimen/progress_bar_size</item>
+        <item name="android:maxWidth">@dimen/progress_bar_size</item>
+        <item name="android:minHeight">@dimen/progress_bar_size</item>
+        <item name="android:minWidth">@dimen/progress_bar_size</item>
+    </style>
 </resources>

@@ -18,6 +18,7 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,6 +27,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,6 +59,8 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
 
     @Bind(R.id.home_activity_textview)
     TextView mHomeTextview;
+    @Bind(R.id.home_activity_progressbar)
+    ProgressBar mProgressBar;
     @Bind(R.id.home_activity_recyclerview)
     RecyclerView mRecyclerView;
 
@@ -69,6 +73,8 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
     private List<Travel> mTravelsDatas;
     private ItemTouchHelper mItemTouchHelper;
     private TravelRecyclerViewAdapter mTravelAdapter;
+
+    private android.os.Handler mHandler = new android.os.Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,26 +99,50 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
     }
 
     private void onShake() {
-        Toast.makeText(HomeActivity.this, "Votre journée est prête", Toast.LENGTH_SHORT).show();
-        mHomeTextview.setVisibility(View.GONE);
-        mRecyclerView.setVisibility(View.VISIBLE);
-
         if (mTravelsDatas.isEmpty()) {
-            mTravelsDatas.add(0, TravelItemProvider.getMorning1());
-            mTravelsDatas.add(1, TravelItemProvider.getLaunch());
-            mTravelsDatas.add(2, TravelItemProvider.getAfternoon1());
-            mTravelsDatas.add(3, TravelItemProvider.getAfternoon2());
-        } else {
+            mHomeTextview.setVisibility(View.VISIBLE);
+            mHomeTextview.setText("Préparation de votre journée");
+            mHomeTextview.setGravity(Gravity.CENTER);
+            mProgressBar.setVisibility(View.VISIBLE);
+            mRecyclerView.setVisibility(View.GONE);
+        }else{
             for (int i = 0; i < mTravelsDatas.size(); i++) {
                 Travel travel = mTravelsDatas.get(i);
                 if (!travel.selected) {
                     //Upadte my travel item
-                    mTravelsDatas.set(i, TravelItemProvider.getRandomTravel(i));
+                    travel.loading = true;
                 }
             }
         }
         mTravelAdapter.notifyDataSetChanged();
 
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                mHomeTextview.setVisibility(View.GONE);
+                mProgressBar.setVisibility(View.GONE);
+                mRecyclerView.setVisibility(View.VISIBLE);
+                if (mTravelsDatas.isEmpty()) {
+                    mTravelsDatas.add(0, TravelItemProvider.getMorning1());
+                    mTravelsDatas.add(1, TravelItemProvider.getLaunch());
+                    mTravelsDatas.add(2, TravelItemProvider.getAfternoon1());
+                    mTravelsDatas.add(3, TravelItemProvider.getAfternoon2());
+                } else {
+                    for (int i = 0; i < mTravelsDatas.size(); i++) {
+                        Travel travel = mTravelsDatas.get(i);
+                        travel.loading=false;
+                        if (!travel.selected) {
+                            //Upadte my travel item
+                            mTravelsDatas.set(i, TravelItemProvider.getRandomTravel(i));
+                        }
+                    }
+                }
+                mTravelAdapter.notifyDataSetChanged();
+
+                Toast.makeText(HomeActivity.this, "Votre journée est prête", Toast.LENGTH_SHORT).show();
+            }
+        }, 2000);
     }
 
     private void setupRecyclerView() {
@@ -245,10 +275,19 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
 
             Travel currentItem = mValues.get(position);
             holder.setTravel(currentItem);
-            holder.mTravelDestinationName.setText(currentItem.name);
-            holder.mTravelTarif.setText(currentItem.tarif);
-            holder.mTravelDistance.setText(currentItem.distance);
-            Glide.with(HomeActivity.this).load(currentItem.backgroundImage).centerCrop().into(holder.mBackgroundImageView);
+            if(currentItem.loading){
+                holder.mProgressBar.setVisibility(View.VISIBLE);
+                holder.mBackgroundImageView.setVisibility(View.GONE);
+                holder.mContent.setVisibility(View.GONE);
+            }else {
+                holder.mProgressBar.setVisibility(View.GONE);
+                holder.mBackgroundImageView.setVisibility(View.VISIBLE);
+                holder.mContent.setVisibility(View.VISIBLE);
+                holder.mTravelDestinationName.setText(currentItem.name);
+                holder.mTravelTarif.setText(currentItem.tarif);
+                holder.mTravelDistance.setText(currentItem.distance);
+                Glide.with(HomeActivity.this).load(currentItem.backgroundImage).centerCrop().into(holder.mBackgroundImageView);
+            }
         }
 
 
@@ -293,6 +332,10 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
         ImageButton mMenuButton;
         @Bind(R.id.travel_list_item_border)
         LinearLayout border;
+        @Bind(R.id.travel_list_item_progressbar)
+        ProgressBar mProgressBar;
+        @Bind(R.id.travel_list_item_content)
+        LinearLayout mContent;
         private Travel travel;
 
         public TravelViewHolder(View itemView) {
