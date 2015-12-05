@@ -30,10 +30,17 @@ import com.bumptech.glide.Glide;
 import com.codetroopers.shakemytours.R;
 import com.codetroopers.shakemytours.core.entities.Travel;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 public class TravelDetailActivity extends AppCompatActivity {
 
     public static final String EXTRA_NAME = "cheese_name";
     public static final String PARAM_TRAVEL = "travel";
+
+
+    @Bind(R.id.backdrop)
+    ImageView imageView;
 
     public static Intent newIntent(Context context, Travel travel) {
         Intent intent = new Intent(context, TravelDetailActivity.class);
@@ -45,6 +52,7 @@ public class TravelDetailActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+        ButterKnife.bind(this);
 
         Intent intent = getIntent();
         final String cheeseName = intent.getStringExtra(EXTRA_NAME);
@@ -57,10 +65,11 @@ public class TravelDetailActivity extends AppCompatActivity {
                 (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         collapsingToolbar.setTitle(cheeseName);
 
-        loadBackdrop();
 
         Travel travel = intent.getParcelableExtra(PARAM_TRAVEL);
         getSupportActionBar().setTitle(travel.name);
+
+        loadBackdrop(travel);
     }
 
     @Override
@@ -73,9 +82,8 @@ public class TravelDetailActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void loadBackdrop() {
-        final ImageView imageView = (ImageView) findViewById(R.id.backdrop);
-        Glide.with(this).load(R.drawable.cheese_1).centerCrop().into(imageView);
+    private void loadBackdrop(Travel travel) {
+        Glide.with(this).load(travel.backgroundImage).centerCrop().into(imageView);
     }
 
 }

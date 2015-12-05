@@ -2,6 +2,7 @@ package com.codetroopers.shakemytours.core.entities;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.DrawableRes;
 
 public class Travel implements Parcelable{
 
@@ -9,7 +10,8 @@ public class Travel implements Parcelable{
     public String distance;
     public String tarif;
     public boolean selected;
-
+    @DrawableRes
+    public int backgroundImage;
 
     public Travel() {
     }
@@ -19,6 +21,7 @@ public class Travel implements Parcelable{
         distance = in.readString();
         tarif = in.readString();
         selected = in.readByte() != 0;
+        backgroundImage = in.readInt();
     }
 
     public static final Creator<Travel> CREATOR = new Creator<Travel>() {
@@ -48,6 +51,12 @@ public class Travel implements Parcelable{
         return this;
     }
 
+    public Travel setBackground(@DrawableRes int resId) {
+        this.backgroundImage = resId;
+        return this;
+    }
+
+
     @Override
     public int describeContents() {
         return 0;
@@ -59,5 +68,6 @@ public class Travel implements Parcelable{
         dest.writeString(distance);
         dest.writeString(tarif);
         dest.writeByte((byte) (selected ? 1 : 0));
+        dest.writeInt(backgroundImage);
     }
 }

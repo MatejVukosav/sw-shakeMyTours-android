@@ -24,9 +24,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.codetroopers.shakemytours.R;
 import com.codetroopers.shakemytours.core.entities.Travel;
 import com.codetroopers.shakemytours.ui.activity.core.BaseActionBarActivity;
@@ -245,6 +247,7 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
             holder.mTravelDestinationName.setText(currentItem.name);
             holder.mTravelTarif.setText(currentItem.tarif);
             holder.mTravelDistance.setText(currentItem.distance);
+            Glide.with(HomeActivity.this).load(currentItem.backgroundImage).centerCrop().into(holder.mBackgroundImageView);
         }
 
 
@@ -275,6 +278,8 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
         public final View mView;
         @Bind(R.id.travel_list_item_cardview)
         CardView mCardView;
+        @Bind(R.id.travel_list_item_background)
+        ImageView mBackgroundImageView;
         @Bind(R.id.travel_list_item_name)
         TextView mTravelDestinationName;
         @Bind(R.id.travel_list_item_details)
@@ -332,7 +337,13 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
         @Override
         public void onClick(View v) {
             Intent startIntent = TravelDetailActivity.newIntent(HomeActivity.this, travel);
-            startActivity(startIntent);
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(HomeActivity.this, mBackgroundImageView, "openDetailImage");
+                startActivity(startIntent, options.toBundle());
+            } else {
+                startActivity(startIntent);
+            }
         }
 
 

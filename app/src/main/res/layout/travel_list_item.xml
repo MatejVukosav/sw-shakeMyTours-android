@@ -11,100 +11,113 @@
         android:id="@+id/travel_list_item_cardview"
         style="@style/Widget.CardView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="120dp"
         android:clickable="true"
         android:focusable="true"
         android:foreground="?selectableItemBackground">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingBottom="8dp"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:paddingTop="8dp">
+            android:layout_height="match_parent">
 
-
-            <LinearLayout
+            <ImageView
+                android:id="@+id/travel_list_item_background"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/travel_list_item_name"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:textColor="@color/primaryText"
-                    android:textSize="@dimen/text_large"
-                    android:textStyle="normal"
-                    android:transitionName="openDetailName"
-                    tools:text="Destination" />
-
-
-                <ImageButton
-                    android:id="@+id/real_time_fragement_list_item_menu_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
-                    android:paddingBottom="2dp"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="0dp"
-                    android:paddingTop="2dp"
-                    android:src="@drawable/ic_check_circle" />
-
-            </LinearLayout>
-
-            <View
-                android:id="@+id/search_divider"
-                android:layout_width="fill_parent"
-                android:layout_height="1dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp"
-                android:background="@color/grey_400" />
+                android:scaleType="centerCrop"
+                android:transitionName="openDetailImage"
+                tools:src="@drawable/cheese_1" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-
-                <TextView
-                    android:id="@+id/travel_list_item_details"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textAppearance="?attr/textAppearanceListItem"
-                    tools:text="nooooooooooooooooooooooooooooooooooooooooooooooooooo" />
+                android:orientation="vertical"
+                android:paddingBottom="8dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="8dp">
 
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/travel_list_item_name"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:textColor="@color/primaryText"
+                        android:textSize="@dimen/text_large"
+                        android:textStyle="normal"
+                        android:transitionName="openDetailName"
+                        tools:text="Destination" />
+
+
+                    <ImageButton
+                        android:id="@+id/real_time_fragement_list_item_menu_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:paddingBottom="2dp"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="0dp"
+                        android:paddingTop="2dp"
+                        android:src="@drawable/ic_check_circle" />
+
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/search_divider"
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/grey_400" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="end"
-                    android:orientation="vertical">
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
 
                     <TextView
-                        android:id="@+id/travel_list_item_distance"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/travel_list_item_details"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:textAppearance="?attr/textAppearanceListItem"
-                        tools:text="120 km" />
+                        tools:text="nooooooooooooooooooooooooooooooooooooooooooooooooooo" />
 
-                    <TextView
-                        android:id="@+id/travel_list_item_tarif"
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textAppearance="?attr/textAppearanceListItem"
-                        tools:text="10€" />
+                        android:gravity="end"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/travel_list_item_distance"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?attr/textAppearanceListItem"
+                            tools:text="120 km" />
+
+                        <TextView
+                            android:id="@+id/travel_list_item_tarif"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?attr/textAppearanceListItem"
+                            tools:text="10€" />
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
+        </RelativeLayout>
     </android.support.v7.widget.CardView>
 
 </LinearLayout>

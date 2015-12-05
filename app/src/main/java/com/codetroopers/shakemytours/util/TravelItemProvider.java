@@ -1,5 +1,6 @@
 package com.codetroopers.shakemytours.util;
 
+import com.codetroopers.shakemytours.R;
 import com.codetroopers.shakemytours.core.entities.Travel;
 
 public class TravelItemProvider {
@@ -20,20 +21,36 @@ public class TravelItemProvider {
     }
 
     public static Travel getMorning1() {
-        return new Travel().setName("Morning" + Strings.nextSessionId()).setDistance("10km").setTarif("20€");
+        return new Travel()
+                .setName("Morning" + Strings.nextSessionId())
+                .setDistance("10km")
+                .setTarif("20€")
+                .setBackground(R.drawable.cheese_1);
     }
 
 
     public static Travel getLaunch() {
-        return new Travel().setName("Launch " + Strings.nextSessionId()).setDistance("10km").setTarif("20€");
+        return new Travel()
+                .setName("Launch " + Strings.nextSessionId())
+                .setDistance("10km")
+                .setTarif("20€")
+                .setBackground(R.drawable.cheese_2);
     }
 
 
     public static Travel getAfternoon1() {
-        return new Travel().setName("AfterNoon " + Strings.nextSessionId()).setDistance("10km").setTarif("20€");
+        return new Travel()
+                .setName("AfterNoon " + Strings.nextSessionId())
+                .setDistance("10km")
+                .setTarif("20€")
+                .setBackground(R.drawable.cheese_3);
     }
 
     public static Travel getAfternoon2() {
-        return new Travel().setName("Afternoon " + Strings.nextSessionId()).setDistance("10km").setTarif("20€");
+        return new Travel()
+                .setName("Afternoon " + Strings.nextSessionId())
+                .setDistance("10km")
+                .setTarif("20€")
+                .setBackground(R.drawable.cheese_4);
     }
 }

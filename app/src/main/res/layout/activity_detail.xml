@@ -39,6 +39,8 @@
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <ImageView
+                android:background="@android:color/white"
+                android:transitionName="openDetailImage"
                 android:id="@+id/backdrop"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
