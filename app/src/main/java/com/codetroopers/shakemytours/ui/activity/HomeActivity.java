@@ -239,6 +239,7 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
         public void onBindViewHolder(final TravelViewHolder holder, int position) {
 
             Travel currentItem = mValues.get(position);
+            holder.setTravel(currentItem);
             holder.mTravelDestinationName.setText(currentItem.name);
             holder.mTravelTarif.setText(currentItem.tarif);
             holder.mTravelDistance.setText(currentItem.distance);
@@ -282,6 +283,7 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
         TextView mTravelTarif;
         @Bind(R.id.real_time_fragement_list_item_menu_button)
         ImageButton mMenuButton;
+        private Travel travel;
 
         public TravelViewHolder(View itemView) {
             super(itemView);
@@ -327,9 +329,16 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
 
         @Override
         public void onClick(View v) {
-            startActivity(TravelDetailActivity.newIntent(HomeActivity.this));
+            startActivity(TravelDetailActivity.newIntent(HomeActivity.this, travel));
         }
 
 
+        public void setTravel(Travel travel) {
+            this.travel = travel;
+        }
+
+        public Travel getTravel() {
+            return travel;
+        }
     }
 }

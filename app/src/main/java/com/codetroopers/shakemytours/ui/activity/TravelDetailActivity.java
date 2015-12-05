@@ -19,6 +19,7 @@ package com.codetroopers.shakemytours.ui.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -27,13 +28,17 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.codetroopers.shakemytours.R;
+import com.codetroopers.shakemytours.core.entities.Travel;
 
 public class TravelDetailActivity extends AppCompatActivity {
 
     public static final String EXTRA_NAME = "cheese_name";
+    public static final String PARAM_TRAVEL = "travel";
 
-    public static Intent newIntent(Context context) {
-        return new Intent(context, TravelDetailActivity.class);
+    public static Intent newIntent(Context context, Travel travel) {
+        Intent intent = new Intent(context, TravelDetailActivity.class);
+        intent.putExtra(PARAM_TRAVEL, travel);
+        return intent;
     }
 
     @Override
@@ -53,6 +58,9 @@ public class TravelDetailActivity extends AppCompatActivity {
         collapsingToolbar.setTitle(cheeseName);
 
         loadBackdrop();
+
+        Travel travel = intent.getParcelableExtra(PARAM_TRAVEL);
+        getSupportActionBar().setTitle(travel.name);
     }
 
     @Override
