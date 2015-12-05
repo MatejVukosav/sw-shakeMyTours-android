@@ -28,4 +28,32 @@
     </style>
 
 
+    <style name="Widget" />
+
+    <style name="Widget.CardView" parent="CardView">
+        <item name="android:layout_marginRight">@dimen/card_margin</item>
+        <item name="android:layout_marginLeft">@dimen/card_margin</item>
+        <item name="android:layout_marginTop">@dimen/card_margin_half</item>
+        <item name="android:layout_marginBottom">@dimen/card_margin_half</item>
+    </style>
+
+
+    <style name="Text" />
+
+    <style name="Text.IntroTitle">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">22sp</item>
+    </style>
+
+    <style name="Text.Title">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="Text.Title.Inverse">
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
 </resources>

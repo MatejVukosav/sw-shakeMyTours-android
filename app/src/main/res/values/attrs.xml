@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- LoadingButton -->
+    <declare-styleable name="LoadingButton">
+        <attr name="android:text" />
+    </declare-styleable>
+
+
+    <!-- LoadingView -->
+    <declare-styleable name="StateView">
+        <attr name="android:text" />
+    </declare-styleable>
+
+</resources>

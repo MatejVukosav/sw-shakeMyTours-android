@@ -1,4 +1,4 @@
-package com.codetroopers.materialAndroidBootstrap.util;
+package com.codetroopers.shakemytours.util;
 
 import org.junit.Test;
 
