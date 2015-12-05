@@ -16,6 +16,7 @@
     the big cheese.</string>
     <string name="detail_title">Travel Detail</string>
     <string name="shakeIt">SHAKE IT</string>
+    <string name="shaking">SHAKING...</string>
     <string name="action_reset">Remise à zéro</string>
 
 </resources>

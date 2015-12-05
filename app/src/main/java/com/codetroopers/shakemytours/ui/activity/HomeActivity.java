@@ -154,9 +154,9 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
     private void onShake() {
         if (mTravelsDatas.isEmpty()) {
             mTelImg.setVisibility(View.GONE);
-
-            mShakeItTitle.setVisibility(View.INVISIBLE);
-            ViewCompat.animate(mShakeItTitle).alpha(0).setDuration(700).start();
+            mShakeItTitle.setText(R.string.shaking);
+//            mShakeItTitle.setVisibility(View.INVISIBLE);
+//            ViewCompat.animate(mShakeItTitle).alpha(0).setDuration(700).start();
 
             mTelImgAnim.setVisibility(View.VISIBLE);
             mTelImgAnim.setAnimation(AnimationUtils.loadAnimation(this, R.anim.pendulum));
@@ -307,6 +307,7 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
                 mTelImg.setVisibility(View.VISIBLE);
                 mShakeItTitle.setVisibility(View.VISIBLE);
                 mShakeItTitle.setAlpha(1);
+                mShakeItTitle.setText(R.string.shakeIt);
                 setFabVisible(false);
                 mDrawer.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 return true;
@@ -370,6 +371,7 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
 
         @Override
         public void onItemDismiss(final int position) {
+            mValues.get(position).selected = false;
             final Travel remove = mValues.remove(position);
             mTravelsDatas.add(position, TravelItemFactory.getRandomFoodEvent(position));
             notifyItemChanged(position);
