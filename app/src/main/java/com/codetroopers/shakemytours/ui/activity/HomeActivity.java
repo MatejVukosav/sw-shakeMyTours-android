@@ -384,7 +384,7 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
     }
 
 
-    class TravelViewHolder extends RecyclerView.ViewHolder implements ItemTouchHelperViewHolder, View.OnClickListener {
+    class TravelViewHolder extends RecyclerView.ViewHolder implements ItemTouchHelperViewHolder, View.OnLongClickListener {
         public final View mView;
         @Bind(R.id.travel_list_item_cardview)
         CardView mCardView;
@@ -400,6 +400,8 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
         ProgressBar mProgressBar;
         @Bind(R.id.travel_list_item_content)
         LinearLayout mContent;
+        @Bind(R.id.travel_list_item_info)
+        ImageView infoImageView;
         private Travel travel;
 
         public TravelViewHolder(View itemView) {
@@ -407,7 +409,7 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
             ButterKnife.bind(this, itemView);
             mView = itemView;
 
-            mCardView.setOnClickListener(this);
+
 
             View.OnClickListener checkItemListener = new View.OnClickListener() {
                 @Override
@@ -430,6 +432,15 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
             };
             mMenuButton.setOnClickListener(checkItemListener);
             mButtonHolder.setOnClickListener(checkItemListener);
+            mCardView.setOnClickListener(checkItemListener);
+
+            View.OnClickListener openDetailActivityListener = new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    openDetailActivity();
+                }
+            };
+            infoImageView.setOnClickListener(openDetailActivityListener);
         }
 
 
@@ -452,7 +463,12 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
         }
 
         @Override
-        public void onClick(View v) {
+        public boolean onLongClick(View v) {
+            openDetailActivity();
+            return true;
+        }
+
+        private void openDetailActivity() {
             Intent startIntent = TravelDetailActivity.newIntent(HomeActivity.this, travel);
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

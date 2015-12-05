@@ -42,6 +42,15 @@
                 tools:src="@drawable/shop"
                 tools:visibility="visible" />
 
+
+            <ImageView
+                android:id="@+id/travel_list_item_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_info_white_24dp"
+                android:layout_alignParentRight="true"
+                android:padding="@dimen/space_small"/>
+
             <LinearLayout
                 android:id="@+id/travel_list_item_content"
                 android:layout_width="match_parent"
