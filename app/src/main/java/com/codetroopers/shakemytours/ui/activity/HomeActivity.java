@@ -1,5 +1,6 @@
 package com.codetroopers.shakemytours.ui.activity;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -59,8 +60,8 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
     @Bind(R.id.left_drawer)
     RecyclerView mDrawerList;
 
-    @Bind(R.id.home_activity_textview)
-    TextView mHomeTextview;
+//    @Bind(R.id.home_activity_textview)
+//    TextView mHomeTextview;
     @Bind(R.id.home_activity_progressbar)
     ProgressBar mProgressBar;
     @Bind(R.id.home_activity_recyclerview)
@@ -114,9 +115,9 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
 
     private void onShake() {
         if (mTravelsDatas.isEmpty()) {
-            mHomeTextview.setVisibility(View.VISIBLE);
-            mHomeTextview.setText("Préparation de votre journée");
-            mHomeTextview.setGravity(Gravity.CENTER);
+//            mHomeTextview.setVisibility(View.VISIBLE);
+//            mHomeTextview.setText("Préparation de votre journée");
+//            mHomeTextview.setGravity(Gravity.CENTER);
             mProgressBar.setVisibility(View.VISIBLE);
             mRecyclerView.setVisibility(View.GONE);
         } else {
@@ -131,10 +132,13 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
         mTravelAdapter.notifyDataSetChanged();
 
         mHandler.postDelayed(new Runnable() {
+
             @Override
             public void run() {
 
-                mHomeTextview.setVisibility(View.GONE);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    mDrawer.setBackground(null);
+                }
                 mProgressBar.setVisibility(View.GONE);
                 mRecyclerView.setVisibility(View.VISIBLE);
                 if (mTravelsDatas.isEmpty()) {

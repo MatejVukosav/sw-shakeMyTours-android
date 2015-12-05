@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".HomeActivity">
+    tools:context=".HomeActivity"
+    android:background="@drawable/home">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -36,13 +37,6 @@
                     android:visibility="gone"
                     tools:visibility="visible" />
 
-                <TextView
-                    android:id="@+id/home_activity_textview"
-                    style="@style/Text.Title.Inverse"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="Shake me" />
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/home_activity_recyclerview"
