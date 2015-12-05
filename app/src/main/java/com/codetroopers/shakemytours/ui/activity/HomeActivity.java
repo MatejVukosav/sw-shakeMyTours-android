@@ -23,8 +23,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.codetroopers.shakemytours.R;
-import com.codetroopers.shakemytours.core.HasComponent;
-import com.codetroopers.shakemytours.core.components.HomeActivityComponent;
 import com.codetroopers.shakemytours.core.entities.Travel;
 import com.codetroopers.shakemytours.ui.activity.core.BaseActionBarActivity;
 import com.codetroopers.shakemytours.util.ItemTouchHelperAdapter;
@@ -34,20 +32,14 @@ import com.codetroopers.shakemytours.util.ShakeDetector;
 import com.codetroopers.shakemytours.util.SimpleItemTouchHelperCallback;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import hugo.weaving.DebugLog;
 
-import static java.lang.String.format;
-
 @DebugLog
-public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter.OnItemClickListener, HasComponent<HomeActivityComponent>,
-        OnStartDragListener {
-
-    private HomeActivityComponent component;
+public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter.OnItemClickListener, OnStartDragListener {
 
     @Bind(R.id.drawer)
     DrawerLayout mDrawer;
@@ -81,16 +73,13 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
         mShakeDetector = new ShakeDetector(new ShakeDetector.OnShakeListener() {
             @Override
             public void onShake() {
-                Toast.makeText(HomeActivity.this, "Aaaaaaaaaaaaaaaaaaaaaaaaaaaa", Toast.LENGTH_SHORT).show();
+                Toast.makeText(HomeActivity.this, "Votre journée est prête", Toast.LENGTH_SHORT).show();
                 mHomeTextview.setVisibility(View.GONE);
                 mRecyclerView.setVisibility(View.VISIBLE);
 
                 setupRecyclerView(mRecyclerView);
-
             }
         });
-
-
     }
 
     private void setupRecyclerView(RecyclerView recyclerView) {
@@ -115,7 +104,6 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
     protected void onResume() {
         super.onResume();
         mSensorManager.registerListener(mShakeDetector, mAccelerometer, SensorManager.SENSOR_DELAY_UI);
-// Registers (mShakeDetector which implements) SensorEventListener
     }
 
     @Override
@@ -201,11 +189,6 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
         selectItem(position);
     }
 
-    @Override
-    public HomeActivityComponent getComponent() {
-        return component;
-    }
-
     private void selectItem(int position) {
         mDrawer.closeDrawer(mDrawerList);
         mAdapter.setActive(position);
@@ -275,25 +258,12 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
         @Bind(R.id.travel_list_item_tarif)
         TextView mTravelTarif;
 
-
-        public String routeId;
-        public String stopId;
-        public String realTimeStopId;
-        public String index;
-
         public TravelViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
             mView = itemView;
         }
 
-        private void delete() {
-            int position = getAdapterPosition();
-
-            mTravelsDatas.remove(position);
-//            mRecyclerView.getAdapter().notifyItemChanged(position);
-
-        }
 
         @Override
         public void onItemSelected(int actionState) {
