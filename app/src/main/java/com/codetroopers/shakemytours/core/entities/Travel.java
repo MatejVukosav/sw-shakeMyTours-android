@@ -4,7 +4,11 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.DrawableRes;
 
+import com.google.android.gms.maps.model.LatLng;
+import com.google.common.base.Objects;
 import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
 
 public class Travel implements Parcelable {
 
@@ -28,6 +32,9 @@ public class Travel implements Parcelable {
     @DrawableRes
     public int backgroundImage;
     public boolean loading;
+    public String latitude;
+    public String longitude;
+
 
     public Travel() {
     }
@@ -102,5 +109,56 @@ public class Travel implements Parcelable {
 
     public String getAddress() {
         return address1 + "\n" + address2 + "\n" + zipCode + "\n" + city;
+    }
+
+    public Travel setCoords(String lat, String lng) {
+        this.latitude = lat;
+        this.longitude = lng;
+        return this;
+    }
+
+    public LatLng toLatLng() {
+        return new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude));
+    }
+
+
+    public static class Coord implements Serializable {
+        public String lng;
+        public String lat;
+
+        //required for jackson to unmarshall
+        public Coord() {
+        }
+
+        public Coord(final String lng, final String lat) {
+            this.lng = lng;
+            this.lat = lat;
+        }
+
+        @Override
+        public String toString() {
+            return lat + "," + lng;
+        }
+
+        public LatLng toLatLng() {
+            return new LatLng(Double.valueOf(lat), Double.valueOf(lng));
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hashCode(lng, lat);
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (this == obj) {
+                return true;
+            }
+            if (obj == null || getClass() != obj.getClass()) {
+                return false;
+            }
+            final Coord other = (Coord) obj;
+            return Objects.equal(this.lng, other.lng) && Objects.equal(this.lat, other.lat);
+        }
     }
 }

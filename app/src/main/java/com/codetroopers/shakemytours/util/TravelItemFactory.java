@@ -43,7 +43,8 @@ public class TravelItemFactory {
                 .setName("Morning" + Strings.nextSessionId())
                 .setDistance("10km")
                 .setTelephone("20€")
-                .setBackground(R.drawable.lake);
+                .setBackground(R.drawable.lake)
+                .setCoords("47.421142", "0.700384");
     }
 
 
@@ -52,7 +53,8 @@ public class TravelItemFactory {
                 .setName("Afternoon " + Strings.nextSessionId())
                 .setDistance("10km")
                 .setTelephone("20€")
-                .setBackground(R.drawable.noel);
+                .setBackground(R.drawable.noel)
+                .setCoords("47.412582", "0.68545");
     }
 
 
@@ -61,7 +63,8 @@ public class TravelItemFactory {
                 .setName("Launch " + Strings.nextSessionId())
                 .setDistance("10km")
                 .setTelephone("20€")
-                .setBackground(R.drawable.vin);
+                .setBackground(R.drawable.vin)
+                .setCoords("47.366353", "0.677934");
     }
 
     public static Travel getAfternoon1() {

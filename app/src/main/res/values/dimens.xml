@@ -25,4 +25,13 @@
     <dimen name="detail_backdrop_height">256dp</dimen>
     <dimen name="progress_bar_size">24dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+
+
+    <dimen name="map_big_marker_radius">10dp</dimen>
+    <dimen name="map_marker_radius">7dp</dimen>
+    <dimen name="map_big_marker_stroke">2dp</dimen>
+    <dimen name="map_marker_stroke">1dp</dimen>
+    <dimen name="map_marker_text_size">12sp</dimen>
+    <dimen name="map_polyline_walk_width">3dp</dimen>
+    <dimen name="map_polyline_bus_width">4dp</dimen>
 </resources>

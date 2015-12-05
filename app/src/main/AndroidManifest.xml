@@ -39,7 +39,7 @@
             android:theme="@style/AppTheme.translucent" />
         <activity
             android:name=".ui.activity.TripActivity"
-            android:label="@string/detail_title"
+            android:label="@string/trip_detail_title"
             android:screenOrientation="portrait" />
         <!--Uncomment to add crashlytics-->
         <!--<meta-data-->
