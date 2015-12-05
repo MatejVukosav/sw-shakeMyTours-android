@@ -103,7 +103,7 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
         setFabVisible(false);
 
 //        FIXME remove for real run
-//        onShake();
+        onShake();
 
         mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -338,6 +338,8 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
         ImageView mBackgroundImageView;
         @Bind(R.id.travel_list_item_name)
         TextView mTravelDestinationName;
+        @Bind(R.id.real_time_fragement_list_item_menu_button_holder)
+        LinearLayout mButtonHolder;
         @Bind(R.id.real_time_fragement_list_item_menu_button)
         ImageButton mMenuButton;
         @Bind(R.id.travel_list_item_border)
@@ -355,7 +357,7 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
 
             mCardView.setOnClickListener(this);
 
-            mMenuButton.setOnClickListener(new View.OnClickListener() {
+            View.OnClickListener checkItemListener = new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Travel currentItem = mTravelsDatas.get(getAdapterPosition());
@@ -363,18 +365,21 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
                     if (currentItem.selected) {
                         mSelectedEvent--;
                         currentItem.selected = false;
-                        mMenuButton.setColorFilter(null);
+                        mMenuButton.setImageResource(android.R.color.transparent);
                         border.setVisibility(View.GONE);
                     } else {
                         mSelectedEvent++;
                         currentItem.selected = true;
                         int color = getResources().getColor(R.color.colorPrimary);
+                        mMenuButton.setImageResource(R.drawable.ic_check_circle);
                         mMenuButton.setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.MULTIPLY));
                         border.setVisibility(View.VISIBLE);
                     }
                     setFabVisible(mSelectedEvent > 0);
                 }
-            });
+            };
+            mMenuButton.setOnClickListener(checkItemListener);
+            mButtonHolder.setOnClickListener(checkItemListener);
         }
 
 

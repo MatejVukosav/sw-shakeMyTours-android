@@ -15,4 +15,5 @@
 
     <color name="windowBackgroundColor">#FAFAFA</color>
     <color name="statusBarTransparentColor">@color/colorPrimary</color>
+    <color name="safe_mode_text">#80ffffff</color>
 </resources>
