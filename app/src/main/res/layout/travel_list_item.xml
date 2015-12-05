@@ -80,15 +80,6 @@
                     android:transitionName="openDetailName"
                     tools:text="Destination" />
             </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/travel_list_item_border"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/border_selected_collapse"
-                android:orientation="horizontal"
-                android:visibility="gone" />
         </RelativeLayout>
     </android.support.v7.widget.CardView>
-
 </LinearLayout>

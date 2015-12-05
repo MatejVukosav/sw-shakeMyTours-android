@@ -348,8 +348,6 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
         LinearLayout mButtonHolder;
         @Bind(R.id.real_time_fragement_list_item_menu_button)
         ImageButton mMenuButton;
-        @Bind(R.id.travel_list_item_border)
-        LinearLayout border;
         @Bind(R.id.travel_list_item_progressbar)
         ProgressBar mProgressBar;
         @Bind(R.id.travel_list_item_content)
@@ -372,14 +370,12 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
                         mSelectedEvent--;
                         currentItem.selected = false;
                         mMenuButton.setImageResource(android.R.color.transparent);
-                        border.setVisibility(View.GONE);
                     } else {
                         mSelectedEvent++;
                         currentItem.selected = true;
                         int color = getResources().getColor(R.color.colorPrimary);
                         mMenuButton.setImageResource(R.drawable.ic_check_circle);
                         mMenuButton.setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.MULTIPLY));
-                        border.setVisibility(View.VISIBLE);
                     }
                     setFabVisible(mSelectedEvent > 0);
                 }
