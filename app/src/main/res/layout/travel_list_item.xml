@@ -39,7 +39,7 @@
                 android:scaleType="centerCrop"
                 android:transitionName="openDetailImage"
                 android:visibility="gone"
-                tools:src="@drawable/canoe"
+                tools:src="@drawable/shop"
                 tools:visibility="visible" />
 
             <LinearLayout
