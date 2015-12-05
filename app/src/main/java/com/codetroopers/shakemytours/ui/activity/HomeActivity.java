@@ -1,6 +1,5 @@
 package com.codetroopers.shakemytours.ui.activity;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -14,18 +13,19 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -50,7 +50,6 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import hugo.weaving.DebugLog;
-import timber.log.Timber;
 
 @DebugLog
 public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter.OnItemClickListener, OnStartDragListener {
@@ -60,10 +59,12 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
     @Bind(R.id.left_drawer)
     RecyclerView mDrawerList;
 
-//    @Bind(R.id.home_activity_textview)
-//    TextView mHomeTextview;
-    @Bind(R.id.home_activity_progressbar)
-    ProgressBar mProgressBar;
+    @Bind(R.id.home_activity_tel)
+    ImageView mTelImg;
+    @Bind(R.id.home_activity_tel2)
+    ImageView mTelImgAnim;
+    @Bind(R.id.home_activity_title)
+    TextView mShakeItTitle;
     @Bind(R.id.home_activity_recyclerview)
     RecyclerView mRecyclerView;
     @Bind(R.id.real_time_fragment_fab)
@@ -115,10 +116,14 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
 
     private void onShake() {
         if (mTravelsDatas.isEmpty()) {
-//            mHomeTextview.setVisibility(View.VISIBLE);
-//            mHomeTextview.setText("Préparation de votre journée");
-//            mHomeTextview.setGravity(Gravity.CENTER);
-            mProgressBar.setVisibility(View.VISIBLE);
+            mTelImg.setVisibility(View.GONE);
+
+            mShakeItTitle.setVisibility(View.INVISIBLE);
+            ViewCompat.animate(mShakeItTitle).alpha(0).setDuration(700).start();
+
+            mTelImgAnim.setVisibility(View.VISIBLE);
+            mTelImgAnim.setAnimation(AnimationUtils.loadAnimation(this, R.anim.pendulum));
+            mTelImgAnim.animate();
             mRecyclerView.setVisibility(View.GONE);
         } else {
             for (int i = 0; i < mTravelsDatas.size(); i++) {
@@ -136,10 +141,10 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
             @Override
             public void run() {
 
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                    mDrawer.setBackground(null);
-                }
-                mProgressBar.setVisibility(View.GONE);
+                mDrawer.setBackgroundColor(getResources().getColor(R.color.white));
+                mTelImgAnim.clearAnimation();
+                mTelImgAnim.setVisibility(View.GONE);
+                mShakeItTitle.setVisibility(View.GONE);
                 mRecyclerView.setVisibility(View.VISIBLE);
                 if (mTravelsDatas.isEmpty()) {
                     mTravelsDatas.add(0, TravelItemProvider.getMorning1());
