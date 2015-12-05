@@ -151,6 +151,7 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
                     mTravelsDatas.add(1, TravelItemProvider.getLaunch());
                     mTravelsDatas.add(2, TravelItemProvider.getAfternoon1());
                     mTravelsDatas.add(3, TravelItemProvider.getAfternoon2());
+                    mTravelsDatas.add(4, TravelItemProvider.getSomething());
                 } else {
                     for (int i = 0; i < mTravelsDatas.size(); i++) {
                         Travel travel = mTravelsDatas.get(i);

@@ -16,6 +16,8 @@ public class TravelItemProvider {
                 return getAfternoon1();
             case 3:
                 return getAfternoon2();
+            case 4:
+                return getSomething();
         }
         return null;
     }
@@ -25,7 +27,7 @@ public class TravelItemProvider {
                 .setName("Morning" + Strings.nextSessionId())
                 .setDistance("10km")
                 .setTarif("20€")
-                .setBackground(R.drawable.cheese_1);
+                .setBackground(R.drawable.canoe);
     }
 
 
@@ -34,7 +36,7 @@ public class TravelItemProvider {
                 .setName("Launch " + Strings.nextSessionId())
                 .setDistance("10km")
                 .setTarif("20€")
-                .setBackground(R.drawable.cheese_2);
+                .setBackground(R.drawable.cathedral);
     }
 
 
@@ -43,7 +45,7 @@ public class TravelItemProvider {
                 .setName("AfterNoon " + Strings.nextSessionId())
                 .setDistance("10km")
                 .setTarif("20€")
-                .setBackground(R.drawable.cheese_3);
+                .setBackground(R.drawable.plein_air);
     }
 
     public static Travel getAfternoon2() {
@@ -51,6 +53,14 @@ public class TravelItemProvider {
                 .setName("Afternoon " + Strings.nextSessionId())
                 .setDistance("10km")
                 .setTarif("20€")
-                .setBackground(R.drawable.cheese_4);
+                .setBackground(R.drawable.vin);
+    }
+
+    public static Travel getSomething() {
+        return new Travel()
+                .setName("Afternoon " + Strings.nextSessionId())
+                .setDistance("10km")
+                .setTarif("20€")
+                .setBackground(R.drawable.shopping);
     }
 }
