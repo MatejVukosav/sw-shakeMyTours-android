@@ -42,6 +42,7 @@
                     android:textColor="@color/primaryText"
                     android:textSize="@dimen/text_large"
                     android:textStyle="normal"
+                    android:transitionName="openDetailName"
                     tools:text="Destination" />
 
 

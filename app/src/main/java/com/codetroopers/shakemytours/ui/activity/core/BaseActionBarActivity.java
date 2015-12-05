@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.codetroopers.shakemytours.R;
-import com.codetroopers.shakemytours.core.AndroidBootstrapApplication;
+import com.codetroopers.shakemytours.core.ShakeMyToursApplication;
 import com.codetroopers.shakemytours.core.components.ApplicationComponent;
 
 import butterknife.Bind;
@@ -34,7 +34,7 @@ public abstract class BaseActionBarActivity extends AppCompatActivity {
     }
 
     protected final ApplicationComponent getApplicationComponent() {
-        return ((AndroidBootstrapApplication) getApplication()).getComponent();
+        return ((ShakeMyToursApplication) getApplication()).getComponent();
     }
 
     @Override

@@ -7,14 +7,15 @@
         android:required="true" />
 
     <application
-        android:name="com.codetroopers.shakemytours.core.AndroidBootstrapApplication"
+        android:name=".core.ShakeMyToursApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity
             android:name="com.codetroopers.shakemytours.ui.activity.HomeActivity"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -22,7 +23,8 @@
         </activity>
         <activity
             android:name=".ui.activity.TravelDetailActivity"
-            android:label="@string/detail_title" />
+            android:label="@string/detail_title"
+            android:screenOrientation="portrait" />
         <!--Uncomment to add crashlytics-->
         <!--<meta-data-->
         <!--android:name="com.crashlytics.ApiKey"-->

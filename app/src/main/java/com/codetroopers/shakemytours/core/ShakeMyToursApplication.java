@@ -11,7 +11,7 @@ import com.squareup.leakcanary.LeakCanary;
 import icepick.Icepick;
 import timber.log.Timber;
 
-public class AndroidBootstrapApplication extends Application implements HasComponent<ApplicationComponent> {
+public class ShakeMyToursApplication extends Application implements HasComponent<ApplicationComponent> {
     private ApplicationComponent applicationComponent;
 
     @Override

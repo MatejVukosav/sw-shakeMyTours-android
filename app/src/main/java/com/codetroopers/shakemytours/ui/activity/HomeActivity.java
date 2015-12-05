@@ -1,6 +1,7 @@
 package com.codetroopers.shakemytours.ui.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -9,6 +10,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -329,7 +331,8 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
 
         @Override
         public void onClick(View v) {
-            startActivity(TravelDetailActivity.newIntent(HomeActivity.this, travel));
+            Intent startIntent = TravelDetailActivity.newIntent(HomeActivity.this, travel);
+            startActivity(startIntent);
         }
 
 

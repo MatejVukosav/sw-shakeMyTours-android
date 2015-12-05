@@ -6,8 +6,8 @@ import android.test.ApplicationTestCase;
 /**
  * <a href="http://d.android.com/tools/testing/testing_android.html">Testing Fundamentals</a>
  */
-public class AndroidBootstrapApplicationTest extends ApplicationTestCase<Application> {
-    public AndroidBootstrapApplicationTest() {
+public class ShakeMyToursApplicationTest extends ApplicationTestCase<Application> {
+    public ShakeMyToursApplicationTest() {
         super(Application.class);
     }
 }
