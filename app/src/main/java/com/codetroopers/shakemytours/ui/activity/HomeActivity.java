@@ -112,7 +112,7 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
 
 //        FIXME remove for real run
 //        onShake();
-        soundEnable = false;
+        soundEnable = false ;
 
         mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
