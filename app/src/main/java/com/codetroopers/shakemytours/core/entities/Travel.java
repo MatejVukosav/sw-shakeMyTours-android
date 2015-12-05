@@ -5,6 +5,7 @@ public class Travel {
     public String name;
     public String distance;
     public String tarif;
+    public boolean selected;
 
 
     public Travel() {

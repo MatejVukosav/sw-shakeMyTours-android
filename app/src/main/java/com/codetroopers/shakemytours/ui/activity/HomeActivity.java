@@ -3,6 +3,9 @@ package com.codetroopers.shakemytours.ui.activity;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Build;
@@ -19,6 +22,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -264,6 +268,8 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
         TextView mTravelDistance;
         @Bind(R.id.travel_list_item_tarif)
         TextView mTravelTarif;
+        @Bind(R.id.real_time_fragement_list_item_menu_button)
+        ImageButton mMenuButton;
 
         public TravelViewHolder(View itemView) {
             super(itemView);
@@ -271,6 +277,21 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
             mView = itemView;
 
             mCardView.setOnClickListener(this);
+
+            mMenuButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Travel currentItem = mTravelsDatas.get(getAdapterPosition());
+                    if (currentItem.selected) {
+                        currentItem.selected = false;
+                        mMenuButton.setColorFilter(null);
+                    } else {
+                        currentItem.selected = true;
+                        int color = getResources().getColor(R.color.colorPrimary);
+                        mMenuButton.setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.MULTIPLY));
+                    }
+                }
+            });
         }
 
 
@@ -296,5 +317,7 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
         public void onClick(View v) {
             startActivity(TravelDetailActivity.newIntent(HomeActivity.this));
         }
+
+
     }
 }
