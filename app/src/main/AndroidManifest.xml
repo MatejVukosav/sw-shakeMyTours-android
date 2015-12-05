@@ -23,6 +23,7 @@
         </activity>
         <activity
             android:name=".ui.activity.TravelDetailActivity"
+            android:theme="@style/AppTheme.translucent"
             android:label="@string/detail_title"
             android:screenOrientation="portrait" />
         <activity
