@@ -104,7 +104,7 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
         setFabVisible(false);
 
 //        FIXME remove for real run
-        onShake();
+//        onShake();
 
         mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -140,7 +140,6 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
 
             @Override
             public void run() {
-
                 mDrawer.setBackgroundColor(getResources().getColor(R.color.white));
                 mTelImgAnim.clearAnimation();
                 mTelImgAnim.setVisibility(View.GONE);
@@ -248,7 +247,7 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
     public boolean onPrepareOptionsMenu(Menu menu) {
         // If the nav drawer is open, hide action items related to the content view
         boolean drawerOpen = mDrawer.isDrawerOpen(mDrawerList);
-        menu.findItem(R.id.action_settings).setVisible(!drawerOpen);
+        menu.findItem(R.id.action_reset).setVisible(!drawerOpen);
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -261,7 +260,16 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
             case android.R.id.home:
                 mDrawer.openDrawer(GravityCompat.START);
                 return true;
-            case R.id.action_settings:
+            case R.id.action_reset:
+                mSelectedEvent = 0;
+                mTravelsDatas.clear();
+                mDrawerAdapter.notifyDataSetChanged();
+                mRecyclerView.setVisibility(View.GONE);
+                mTelImg.setVisibility(View.VISIBLE);
+                mShakeItTitle.setVisibility(View.VISIBLE);
+                mShakeItTitle.setAlpha(1);
+                setFabVisible(false);
+                mDrawer.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 return true;
         }
         return super.onOptionsItemSelected(item);
