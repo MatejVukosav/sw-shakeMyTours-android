@@ -368,6 +368,10 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
             return mValues.size();
         }
 
+        @Override
+        public boolean canSwipe(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+            return !((TravelViewHolder) viewHolder).getTravel().selected;
+        }
 
         @Override
         public void onItemDismiss(final int position) {
@@ -408,7 +412,6 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
             super(itemView);
             ButterKnife.bind(this, itemView);
             mView = itemView;
-
 
 
             View.OnClickListener checkItemListener = new View.OnClickListener() {

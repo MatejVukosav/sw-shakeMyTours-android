@@ -54,4 +54,6 @@ public interface ItemTouchHelperAdapter {
      * @see RecyclerView.ViewHolder#getAdapterPosition()
      */
     void onItemDismiss(int position);
+
+    boolean canSwipe(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder);
 }
