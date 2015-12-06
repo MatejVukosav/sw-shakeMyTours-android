@@ -30,6 +30,8 @@ public class Travel implements Parcelable {
     public String latitude;
     @SerializedName("lgt")
     public String longitude;
+    @SerializedName("file")
+    public String file;
 
 
     public Travel() {
