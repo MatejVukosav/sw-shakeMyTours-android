@@ -217,7 +217,9 @@ public class TripActivity extends AppCompatActivity implements GoogleApiClient.C
             @Override
             protected void onPostExecute(JsonDirectionResponse jsonDirectionResponse) {
                 super.onPostExecute(jsonDirectionResponse);
-                showMapWithPoints(jsonDirectionResponse);
+                if (!TripActivity.this.isFinishing()) {
+                    showMapWithPoints(jsonDirectionResponse);
+                }
             }
         }.execute();
 
