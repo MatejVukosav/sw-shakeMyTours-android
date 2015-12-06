@@ -22,13 +22,14 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 import android.graphics.Rect;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.ShareActionProvider;
@@ -39,13 +40,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.codetroopers.shakemytours.R;
 import com.codetroopers.shakemytours.core.entities.Travel;
 import com.codetroopers.shakemytours.util.Strings;
@@ -383,18 +381,10 @@ public class TripActivity extends AppCompatActivity implements GoogleApiClient.C
 
             Travel currentItem = mTravels.get(position);
             holder.setTravel(currentItem);
-            if (currentItem.loading) {
-                holder.mProgressBar.setVisibility(View.VISIBLE);
-                holder.mBackgroundImageView.setVisibility(View.GONE);
-                holder.mContent.setVisibility(View.GONE);
-            } else {
-                holder.mProgressBar.setVisibility(View.GONE);
-                holder.mBackgroundImageView.setVisibility(View.VISIBLE);
-                holder.mContent.setVisibility(View.VISIBLE);
-                holder.mTravelDestinationName.setText(currentItem.name);
-                Glide.with(TripActivity.this).load(currentItem.getResourceId()).centerCrop().into(holder.mBackgroundImageView);
-                holder.mMenuButton.setImageBitmap(mMarkerList.get(position));
-            }
+            holder.mTravelDestinationName.setText(currentItem.name);
+            holder.mMarkerImage.setImageBitmap(mMarkerList.get(position));
+
+
         }
 
 
@@ -402,35 +392,37 @@ public class TripActivity extends AppCompatActivity implements GoogleApiClient.C
         public int getItemCount() {
             return mTravels.size();
         }
-
-
     }
 
 
     class TravelTripViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        @Bind(R.id.trip_list_item_cardview)
-        CardView mCardView;
-        @Bind(R.id.trip_list_item_background)
-        ImageView mBackgroundImageView;
         @Bind(R.id.trip_list_item_name)
         TextView mTravelDestinationName;
-        @Bind(R.id.trip_list_item_menu_button_holder)
-        LinearLayout mButtonHolder;
-        @Bind(R.id.trip_list_item_menu_button)
-        ImageButton mMenuButton;
-        @Bind(R.id.trip_list_item_progressbar)
-        ProgressBar mProgressBar;
-        @Bind(R.id.trip_list_item_content)
-        LinearLayout mContent;
-        @Bind(R.id.trip_list_item_info)
-        ImageView infoImageView;
+        @Bind(R.id.trip_list_item_marker)
+        ImageView mMarkerImage;
+        @Bind(R.id.trip_list_item_detail_layout)
+        LinearLayout mLayoutDetail;
+        @Bind(R.id.trip_list_item_detail_image)
+        ImageView mImageDetail;
         private Travel travel;
 
         public TravelTripViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
             mView = itemView;
+
+            mImageDetail.setColorFilter(new PorterDuffColorFilter(primaryColor, PorterDuff.Mode.MULTIPLY));
+
+            View.OnClickListener onClickDetailListener = new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent startIntent = TravelDetailActivity.newIntent(TripActivity.this, travel);
+                    startActivity(startIntent);
+                }
+            };
+            mImageDetail.setOnClickListener(onClickDetailListener);
+            mLayoutDetail.setOnClickListener(onClickDetailListener);
         }
 
 
