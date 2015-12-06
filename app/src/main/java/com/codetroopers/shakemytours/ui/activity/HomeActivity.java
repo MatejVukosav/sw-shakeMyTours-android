@@ -117,7 +117,16 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
         mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(TripActivity.newIntent(HomeActivity.this));
+                //pik only selected
+                ArrayList<Travel> selectedTravels = new ArrayList<Travel>();
+                for (int i = 0; i < mTravelsDatas.size(); i++) {
+                    Travel travel = mTravelsDatas.get(i);
+                    if (travel.selected) {
+                        selectedTravels.add(travel);
+                    }
+                }
+
+                startActivity(TripActivity.newIntent(HomeActivity.this, selectedTravels));
             }
         });
 

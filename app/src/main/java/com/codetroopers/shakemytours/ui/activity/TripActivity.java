@@ -32,7 +32,6 @@ import android.view.MenuItem;
 
 import com.codetroopers.shakemytours.R;
 import com.codetroopers.shakemytours.core.entities.Travel;
-import com.codetroopers.shakemytours.util.TravelItemFactory;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
@@ -46,7 +45,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
-import com.google.common.collect.Lists;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,8 +55,11 @@ import butterknife.ButterKnife;
 public class TripActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
 
-    public static Intent newIntent(Context context) {
+    public static final String PARAM_TRAVELS = "PARAM_TRAVELS";
+
+    public static Intent newIntent(Context context, ArrayList<Travel> selectedTravels) {
         Intent intent = new Intent(context, TripActivity.class);
+        intent.putParcelableArrayListExtra(PARAM_TRAVELS, selectedTravels);
         return intent;
     }
 
@@ -67,12 +68,13 @@ public class TripActivity extends AppCompatActivity implements GoogleApiClient.C
 
     int primaryColor;
     int accentColor;
-
     @Nullable
     private GoogleMap map;
+
     @Nullable
     private LatLng mLastLatLng;
     private GoogleApiClient mGoogleApiClient;
+    private ArrayList<Travel> mTravels;
 
 
     @Override
@@ -89,6 +91,7 @@ public class TripActivity extends AppCompatActivity implements GoogleApiClient.C
         accentColor = getResources().getColor(R.color.colorAccent);
         mapView.onCreate(savedInstanceState);
 
+        mTravels = getIntent().getParcelableArrayListExtra(PARAM_TRAVELS);
         buildGoogleApiClient();
     }
 
@@ -109,11 +112,6 @@ public class TripActivity extends AppCompatActivity implements GoogleApiClient.C
 
     private void initMap() {
 
-        List<Travel> fakeTravel = Lists.newArrayList();
-        fakeTravel.add(TravelItemFactory.getMorning1(this));
-        fakeTravel.add(TravelItemFactory.getMorning2(this));
-        fakeTravel.add(TravelItemFactory.getLunch(this));
-
         MapsInitializer.initialize(this);
         List<MarkerOptions> mapMarkerOptionsList = new ArrayList<>();
         List<PolylineOptions> mapPolylineOptionsList = new ArrayList<>();
@@ -121,8 +119,8 @@ public class TripActivity extends AppCompatActivity implements GoogleApiClient.C
         Bitmap intermediateMarker = createIntermediateMarker();
         final LatLngBounds.Builder boundsBuilder = new LatLngBounds.Builder();
 
-        for (int y = 0; y < fakeTravel.size(); y++) {
-            Travel currentTravel = fakeTravel.get(y);
+        for (int y = 0; y < mTravels.size(); y++) {
+            Travel currentTravel = mTravels.get(y);
             //We dont add last because last have special marker
             mapMarkerOptionsList.add(new MarkerOptions()
                     .position(currentTravel.toLatLng())
@@ -135,8 +133,8 @@ public class TripActivity extends AppCompatActivity implements GoogleApiClient.C
 
         commuteLatLngPoints.add(mLastLatLng);
         boundsBuilder.include(mLastLatLng);
-        for (int i = 0; i < fakeTravel.size(); i++) {
-            Travel currentPoint = fakeTravel.get(i);
+        for (int i = 0; i < mTravels.size(); i++) {
+            Travel currentPoint = mTravels.get(i);
             //add point on cummute line
             commuteLatLngPoints.add(currentPoint.toLatLng());
             //add point in bound to perfect zoom map
