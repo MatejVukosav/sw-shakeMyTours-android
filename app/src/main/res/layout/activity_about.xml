@@ -70,20 +70,6 @@
                         android:text="@string/activty_about_content_1"
                         android:textColor="@color/colorText" />
 
-                    <TextView
-                        android:id="@+id/about_fragment_content_2"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/activty_about_content_2"
-                        android:textColor="@color/colorText" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="20dp"
-                        android:background="@color/grey_400" />
-
-
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 
