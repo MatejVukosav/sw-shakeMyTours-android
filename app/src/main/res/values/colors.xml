@@ -15,6 +15,7 @@
     <color name="white_light">#80ffffff</color>
 
     <color name="text_shadow">#7F000000</color>
+    <color name="text_shadow_2">#5F000000</color>
 
 
     <color name="windowBackgroundColor">#FAFAFA</color>
