@@ -3,25 +3,25 @@
     "type":"Excursions culturelles",
     "address":"8, rue Nationale, 37000 Tours",
     "lat":47.396318,
-    "lgt":"0.686843",
+    "lgt":0.686843,
     "name":"Musée du Compagnonnage",
-    "site":"museecompagnonnage.fr",
+    "site":"http://museecompagnonnage.fr",
     "tel":"02 47 21 62 20"
   },
   {
     "type":"Excursions culturelles",
     "address":"18 Place François Sicard, 37000 Tours",
     "lat":47.395156,
-    "lgt":"0.694086",
+    "lgt":0.694086,
     "name":"Musée des Beaux Arts",
-    "site":"mba.tours.fr",
+    "site":"http://mba.tours.fr",
     "tel":"02 47 05 68 73"
   },
   {
     "type":"Excursions culturelles",
     "address":"25 Rue de la Bourdaisière, 37270 Montlouis-sur-Loire",
     "lat":47.368774,
-    "lgt":"0.836232",
+    "lgt":0.836232,
     "name":"Chateau de la Bourdaisière",
     "site":"http://www.labourdaisiere.com/",
     "tel":"02 47 45 16 31"
@@ -30,7 +30,7 @@
     "type":"Excursions culturelles",
     "address":"12-14 rue du Chateau, 37250 Montbazon",
     "lat":47.28828,
-    "lgt":"0.713427",
+    "lgt":0.713427,
     "name":"Forteresse de Montbazon",
     "site":"http://www.forteressedufauconnoir.com/",
     "tel":"02 47 34 34 10"
@@ -39,7 +39,7 @@
     "type":"Excursions culturelles",
     "address":"55 Rue Marcel Tribut, 37000 Tours",
     "lat":47.390195,
-    "lgt":"0.699489",
+    "lgt":0.699489,
     "name":"Centre de Création Contemporrain Olivier Debré",
     "site":"http://cccod.fr",
     "tel":""
@@ -48,16 +48,16 @@
     "type":"Eglises, Cathédrales (lieux de culte)",
     "address":"Place de la cathédrale, 37000 Tours",
     "lat":47.395531,
-    "lgt":"0.694386",
+    "lgt":0.694386,
     "name":"Cathédrale de Saint Gatien",
-    "site":"catholique.fr",
+    "site":"http://catholique.fr",
     "tel":"02 47 70 21 00"
   },
   {
     "type":"Opéra - Théâtre - Ballets - Spectacles humoristiques",
     "address":"7 Rue de Luce, 37000 Tours",
     "lat":47.39425,
-    "lgt":"0.688815",
+    "lgt":0.688815,
     "name":"Centre Régional Dramatique de Tours",
     "site":"http://www.cdrtours.fr",
     "tel":""
@@ -66,7 +66,7 @@
     "type":"Opéra - Théâtre - Ballets - Spectacles humoristiques",
     "address":"26 Boulevard Heurteloup, 37000 Tours",
     "lat":47.392454,
-    "lgt":"0.693130",
+    "lgt":0.693130,
     "name":"Vinci - Centre International de Congrès de Tours Val-de-Loire",
     "site":"http://www.tours-evenements.com/vinci-conventions.html",
     "tel":"02 47 70 70 70"
@@ -75,7 +75,7 @@
     "type":"Opéra - Théâtre - Ballets - Spectacles humoristiques",
     "address":"34 Rue de la Scellerie, 37000 Tours",
     "lat":47.39546,
-    "lgt":"0.689947",
+    "lgt":0.689947,
     "name":"Opéra - Théâtre - Ballets - Spectacles humoristiques",
     "site":"http://www.operadetours.fr",
     "tel":"02 47 60 20 00"
@@ -84,34 +84,34 @@
     "type":"Activités gratuites",
     "address":"3 Rue Principale, 37510 Villandry",
     "lat":47.340013,
-    "lgt":"0.514326",
+    "lgt":0.514326,
     "name":"Chateau de Villandry",
-    "site":"chateauvillandry.fr",
+    "site":"http://chateauvillandry.fr",
     "tel":""
   },
   {
     "type":"Activités gratuites",
     "address":" 35 Boulevard Tonnellé, 37000 Tours",
     "lat":47.386948,
-    "lgt":"0.666924",
+    "lgt":0.666924,
     "name":"Jardin Botanique",
-    "site":"tours.fr",
+    "site":"http://tours.fr",
     "tel":"02 47 21 62 67"
   },
   {
     "type":"Activités payantes",
     "address":"Rue Nationale, 37000 Tours",
     "lat":47.39229,
-    "lgt":"0.688010",
+    "lgt":0.688010,
     "name":"Shopping Rue Nationale",
-    "site":"",
+    "site":"http://",
     "tel":""
   },
   {
     "type":"Activités payantes",
     "address":"8 Rue Auguste Chevallier, 37000 Tours",
     "lat":47.384431,
-    "lgt":"0.678358",
+    "lgt":0.678358,
     "name":"Cabaret Chez Nello",
     "site":"http://www.cabaretnello.com/",
     "tel":"02 47 39 12 11"
@@ -120,7 +120,7 @@
     "type":"Activités payantes",
     "address":"61 avenue Pont Cher, 37000 Tours",
     "lat":47.367015,
-    "lgt":"0.675081",
+    "lgt":0.675081,
     "name":"Gloriette",
     "site":"http://www.agglo-tours.fr/index.php?idtf=5418",
     "tel":"02 47 76 10 31"
@@ -129,7 +129,7 @@
     "type":"Activités payantes",
     "address":"53 bis rue Léon Boyer, 37000 Tours",
     "lat":47.389772,
-    "lgt":"0.673992",
+    "lgt":0.673992,
     "name":"Escape Yourself",
     "site":"http://www.escapeyourself.fr/accueil",
     "tel":"06 28 48 00 34"
@@ -138,7 +138,7 @@
     "type":"Activités payantes",
     "address":"Château de la Touche - 37510 Ballan-Miré",
     "lat":47.336377,
-    "lgt":"0.590600",
+    "lgt":0.590600,
     "name":"Golf de Ballan MIré",
     "site":"http://www.golfdetouraine.com/",
     "tel":"02 47 53 20 28"
@@ -147,7 +147,7 @@
     "type":"Activités payantes",
     "address":"Lieu dit les Hauts Boeufs, 37400 Lussault-sur-Loire",
     "lat":47.388479,
-    "lgt":"0.910512",
+    "lgt":0.910512,
     "name":"Aquarium du Val de Loire",
     "site":"http://aquariumduvaldeloire.com",
     "tel":"02 47 23 44 44"
@@ -156,25 +156,25 @@
     "type":"Bonus Jury",
     "address":"41110 Saint-Aignan-sur-Cher",
     "lat":47.252129,
-    "lgt":"1.353723",
+    "lgt":1.353723,
     "name":"Zoo de Beauval",
-    "site":"zoobeauval.com",
+    "site":"http://zoobeauval.com",
     "tel":"02 54 75 50 00"
   },
   {
     "type":"Bonus Jury",
     "address":"20 Place Gaston Paillhou, 37000 Tours",
     "lat":47.395586,
-    "lgt":"0.680735",
+    "lgt":0.680735,
     "name":"In Extenso",
-    "site":"inextenso.fr",
+    "site":"http://inextenso.fr",
     "tel":"09 83 00 27 03"
   },
   {
     "type":"Bonus Jury",
     "address":"59 Rue Néricault Destouches, 37041 Tours",
     "lat":47.39219,
-    "lgt":"0.682336",
+    "lgt":0.682336,
     "name":"Centre d'Etudes supérieures du Patrimoine et de la Renaissance",
     "site":"cesr.univ-tours.fr",
     "tel":"02 47 36 77 61"
@@ -183,16 +183,16 @@
     "type":"Bonus Jury",
     "address":"4 Bis Rue Jules Favre, 37000 Tours",
     "lat":47.395475,
-    "lgt":"0.687932",
+    "lgt":0.687932,
     "name":"CCI Touraine",
-    "site":"touraine.cci.fr",
+    "site":"http://touraine.cci.fr",
     "tel":"02 47 47 20 00"
   },
   {
     "type":"Bonus Jury",
     "address":"La Grange David, 37520 La Riche",
     "lat":47.375637,
-    "lgt":"0.646751",
+    "lgt":0.646751,
     "name":"Centre d'Agglomération Tours Plus",
     "site":"agglo-tours.fr",
     "tel":"02 47 38 43 65"
@@ -201,16 +201,16 @@
     "type":"Bonus Jury",
     "address":"Place de la Préfecture, 37000 Tours",
     "lat":47.39326,
-    "lgt":"0.691325",
+    "lgt":0.691325,
     "name":"Agence Départementale du Tourisme en Touraine",
-    "site":"touraineloirevalley.com",
+    "site":"http://touraineloirevalley.com",
     "tel":"02 47 70 37 37"
   },
   {
     "type":"Bonus Jury",
     "address":"121 Boulevard Charles de Gaulle, 37540 Saint-Cyr-sur-Loire\n\n\n\n",
     "lat":47.414307,
-    "lgt":"0.670871",
+    "lgt":0.670871,
     "name":"Crédit Agricole de la Touraine et du Poitou",
     "site":"ca-tourainepoitou.fr",
     "tel":"02 47 42 65 88"
@@ -219,9 +219,9 @@
     "type":"Bonus Jury",
     "address":"Route de Paris Centre Commercial, 37100 Tours",
     "lat":47.427342,
-    "lgt":"0.699961",
+    "lgt":0.699961,
     "name":"Orange Tours",
-    "site":"orange.fr",
+    "site":"http://orange.fr",
     "tel":"02 47 36 00 90"
   }
 ]
