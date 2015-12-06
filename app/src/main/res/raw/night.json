@@ -7,7 +7,7 @@
     "name": "Guinguette de Tours sur Loire",
     "site": "http://www.tours.fr/453-tours-sur-loire.htm",
     "tel": "06 20 62 67 17",
-    "file": "2"
+    "eventType": "bar"
   },
   {
     "type": "Bars",
@@ -17,7 +17,7 @@
     "name": "Paddy Flaherty",
     "site": "http://",
     "tel": "02 47 31 93 50",
-    "file": "2"
+    "eventType": "bar"
   },
   {
     "type": "Bars",
@@ -27,7 +27,7 @@
     "name": "Le Corsaire",
     "site": "http://",
     "tel": "02 47 05 20 00",
-    "file": "2"
+    "eventType": "bar"
   },
   {
     "type": "Bars",
@@ -37,6 +37,6 @@
     "name": "Place Plumereau",
     "site": "http://placeplumereau.com",
     "tel": "02 47 70 37 37",
-    "file": "2"
+    "eventType": "bar"
   }
 ]

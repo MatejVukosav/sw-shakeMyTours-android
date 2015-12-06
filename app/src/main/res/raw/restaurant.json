@@ -7,7 +7,7 @@
     "name": "La maison des Halles",
     "site": "http://maisondeshalles.com",
     "tel": "",
-    "file": "1"
+    "eventType": "resto"
   },
   {
     "type": "Restauration",
@@ -17,7 +17,7 @@
     "name": "L’Evidence",
     "site": "restaurant-levidence.com",
     "tel": "",
-    "file": "1"
+    "eventType": "resto"
   },
   {
     "type": "Restauration",
@@ -27,7 +27,7 @@
     "name": "Le Café Marcel",
     "site": "http://www.lecafemarcel.com/",
     "tel": "",
-    "file": "1"
+    "eventType": "resto"
   },
   {
     "type": "Restauration",
@@ -37,7 +37,7 @@
     "name": "Le Turon",
     "site": "http://",
     "tel": "02 47 66 14 25",
-    "file": "1"
+    "eventType": "resto"
   },
   {
     "type": "Restauration",
@@ -47,7 +47,7 @@
     "name": "Café d’Isa",
     "site": "http://",
     "tel": "02 47 38 61 61",
-    "file": "1"
+    "eventType": "resto"
   },
   {
     "type": "Restauration",
@@ -57,7 +57,7 @@
     "name": "Moulin Bleu",
     "site": "http://lemoulinbleu.com",
     "tel": "02 47 97 73 13",
-    "file": "1"
+    "eventType": "resto"
   },
   {
     "type": "Restauration",
@@ -67,7 +67,7 @@
     "name": "Nobuki",
     "site": "http://nobuki.fr",
     "tel": "02 47 05 79 79",
-    "file": "1"
+    "eventType": "resto"
   },
   {
     "type": "Restauration",
@@ -77,7 +77,7 @@
     "name": "Bagels & coffee",
     "site": "http://alexlemetais.wix.com",
     "tel": "06 76 69 49 26",
-    "file": "1"
+    "eventType": "resto"
   },
   {
     "type": "Restauration",
@@ -87,7 +87,7 @@
     "name": "Mao",
     "site": "http://restaurantmao.fr",
     "tel": "",
-    "file": "1"
+    "eventType": "resto"
   },
   {
     "type": "Restauration",
@@ -97,7 +97,7 @@
     "name": "Zen",
     "site": "http://",
     "tel": "02 47 66 70 84",
-    "file": "1"
+    "eventType": "resto"
   },
   {
     "type": "Restauration",
@@ -107,7 +107,7 @@
     "name": "L'Arôme Restaurant",
     "site": "http://",
     "tel": "02 47 05 99 81",
-    "file": "1"
+    "eventType": "resto"
   },
   {
     "type": "Restauration",
@@ -117,7 +117,7 @@
     "name": "Zafferano",
     "site": "http://",
     "tel": "02 47 38 90 77",
-    "file": "1"
+    "eventType": "resto"
   },
   {
     "type": "Restauration",
@@ -127,7 +127,7 @@
     "name": "Bistro des Belles Caves",
     "site": "http://lesbellescaves.com",
     "tel": "02 47 05 71 21",
-    "file": "1"
+    "eventType": "resto"
   },
   {
     "type": "Restauration",
@@ -137,7 +137,7 @@
     "name": "Hôtel Le Moulin Fleuri",
     "site": "moulin-fleuri.com",
     "tel": "02 47 26 01 12",
-    "file": "1"
+    "eventType": "resto"
   },
   {
     "type": "Restauration",
@@ -147,6 +147,6 @@
     "name": "Domaine BOURILLON-DORLEANS - Vouvray",
     "site": "http://www.bourillon.com/le-domaine.html",
     "tel": "02 47 52 83 07",
-    "file": "1"
+    "eventType": "resto"
   }
 ]

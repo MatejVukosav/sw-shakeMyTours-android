@@ -11,6 +11,8 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
+import timber.log.Timber;
+
 public class Travel implements Parcelable {
 
     @SerializedName("name")
@@ -31,8 +33,8 @@ public class Travel implements Parcelable {
     public String latitude;
     @SerializedName("lgt")
     public String longitude;
-    @SerializedName("file")
-    public int fileId;
+    @SerializedName("eventType")
+    public String eventType;
 
 
     public Travel() {
@@ -48,6 +50,9 @@ public class Travel implements Parcelable {
         selected = in.readByte() != 0;
         backgroundImage = in.readInt();
         loading = in.readByte() != 0;
+        latitude = in.readString();
+        longitude = in.readString();
+        eventType = in.readString();
     }
 
     public static final Creator<Travel> CREATOR = new Creator<Travel>() {
@@ -83,14 +88,48 @@ public class Travel implements Parcelable {
     }
 
     public int getResourceId() {
-        switch (fileId) {
-            case 1:
+        Timber.i("resource for " + name);
+        switch (eventType) {
+            case "resto":
                 return R.drawable.vin;
-            case 2:
+            case "bar":
                 return R.drawable.bar;
+            case "musee":
+                return R.drawable.musee;
+            case "spectacle":
+                return R.drawable.spectacle;
+            case "nature":
+                return R.drawable.nature;
+            case "eglise":
+                return R.drawable.eglise;
+            case "chateau":
+                return R.drawable.chateau;
+            case "zoo":
+                return R.drawable.zoo;
+            case "orange":
+                return R.drawable.orange;
+            case "inextenso":
+            case "enigma":
+            case "cesr":
+            case "cci":
             default:
-                return R.drawable.noel;
+                return R.drawable.smt_default;
         }
+    }
+
+
+    public String getAddress() {
+        return address1;
+    }
+
+    public Travel setCoords(String lat, String lng) {
+        this.latitude = lat;
+        this.longitude = lng;
+        return this;
+    }
+
+    public LatLng toLatLng() {
+        return new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude));
     }
 
     @Override
@@ -108,20 +147,9 @@ public class Travel implements Parcelable {
         dest.writeByte((byte) (selected ? 1 : 0));
         dest.writeInt(backgroundImage);
         dest.writeByte((byte) (loading ? 1 : 0));
-    }
-
-    public String getAddress() {
-        return address1;
-    }
-
-    public Travel setCoords(String lat, String lng) {
-        this.latitude = lat;
-        this.longitude = lng;
-        return this;
-    }
-
-    public LatLng toLatLng() {
-        return new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude));
+        dest.writeString(latitude);
+        dest.writeString(longitude);
+        dest.writeString(eventType);
     }
 
 
