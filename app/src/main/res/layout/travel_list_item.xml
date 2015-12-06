@@ -47,9 +47,9 @@
                 android:id="@+id/travel_list_item_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_info_white_24dp"
                 android:layout_alignParentRight="true"
-                android:padding="@dimen/space_small"/>
+                android:padding="@dimen/space_small"
+                android:src="@drawable/ic_info_white_24dp" />
 
             <LinearLayout
                 android:id="@+id/travel_list_item_content"
@@ -80,14 +80,18 @@
                 </LinearLayout>
 
                 <TextView
-                    android:paddingLeft="16dp"
                     android:id="@+id/travel_list_item_name"
                     style="@style/Text.Title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAlignment="center"
                     android:ellipsize="end"
                     android:maxLines="3"
+                    android:paddingLeft="16dp"
+                    android:shadowColor="@color/text_shadow"
+                    android:shadowDx="2"
+                    android:shadowDy="2"
+                    android:shadowRadius="4"
+                    android:textAlignment="center"
                     android:transitionName="openDetailName"
                     tools:text="Destinati v sdfgsdfg sdfg sdfgsdfg  sdf gsfdg sdqsdf qsdf sdon" />
             </LinearLayout>
