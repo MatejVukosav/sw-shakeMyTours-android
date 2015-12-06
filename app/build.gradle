@@ -86,6 +86,7 @@ dependencies {
     compile 'com.jakewharton.timber:timber:3.1.0'
     compile 'com.github.frankiesardo:auto-parcel:' + autoparcelVersion
     compile 'frankiesardo:icepick:' + icepickVersion
+    compile 'com.squareup.retrofit:retrofit:1.2.2'
 
     compile 'com.google.android.gms:play-services-maps:8.3.0'
     compile 'com.google.android.gms:play-services-location:8.3.0'

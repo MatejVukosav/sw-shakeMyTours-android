@@ -27,6 +27,7 @@ import android.graphics.PorterDuffColorFilter;
 import android.graphics.Rect;
 import android.location.Location;
 import android.os.Build;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityOptionsCompat;
@@ -49,6 +50,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.codetroopers.shakemytours.R;
 import com.codetroopers.shakemytours.core.entities.Travel;
+import com.codetroopers.shakemytours.service.JsonDirectionResponse;
+import com.codetroopers.shakemytours.util.TravelItemFactory;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
@@ -61,13 +64,26 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.common.collect.Lists;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.lang.reflect.Type;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import timber.log.Timber;
 
 public class TripActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
@@ -92,7 +108,7 @@ public class TripActivity extends AppCompatActivity implements GoogleApiClient.C
     private GoogleMap map;
 
     @Nullable
-    private LatLng mLastLatLng;
+    private LatLng mLastKnownLatLng;
     private GoogleApiClient mGoogleApiClient;
     private ArrayList<Travel> mTravels;
 
@@ -117,6 +133,8 @@ public class TripActivity extends AppCompatActivity implements GoogleApiClient.C
         mapView.onCreate(savedInstanceState);
         setupRecyclerView();
         buildGoogleApiClient();
+
+
     }
 
     private void initAvailableColors() {
@@ -145,6 +163,68 @@ public class TripActivity extends AppCompatActivity implements GoogleApiClient.C
 
     private void initMap() {
 
+        String orgineCoord = "origin=" + mLastKnownLatLng.latitude + "," + mLastKnownLatLng.longitude;
+        String destCoord = "destination=" + mTravels.get(mTravels.size() - 1).latitude + "," + mTravels.get(mTravels.size() - 1).longitude;
+
+        String waypoints = "waypoints=";
+        for (int i = 0; i < mTravels.size() - 1; i++) {
+            waypoints += mTravels.get(i).latitude + "," + mTravels.get(i).longitude + "|";
+        }
+        URL url = null;
+        try {
+            url = new URL("https://maps.googleapis.com/maps/api/directions/json?" + orgineCoord + "&" + destCoord + "&" + waypoints + "&key=AIzaSyAHPXTD5kFmDX7YzkzLPTk0hOvmEKOITz4");
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        final URL finalUrl = url;
+        new AsyncTask<Void, Void, JsonDirectionResponse>() {
+            @Override
+            protected JsonDirectionResponse doInBackground(Void... params) {
+                JsonDirectionResponse response = null;
+                HttpURLConnection request = null;
+                try {
+                    request = (HttpURLConnection) finalUrl.openConnection();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+
+                BufferedReader reader = null;
+                Gson gson = new GsonBuilder().create();
+                try {
+                    reader = new BufferedReader(new InputStreamReader(request.getInputStream()));
+
+                    final Type result = new TypeToken<JsonDirectionResponse>() {
+                    }.getType();
+
+                    response = gson.fromJson(reader, result);
+                } catch (Exception e) {
+                    Timber.e(e, "");
+                } finally {
+                    if (null != reader) {
+                        try {
+                            reader.close();
+                        } catch (IOException e) {
+                            Timber.e(e, "");
+                        }
+                    }
+                }
+                return response;
+            }
+
+            @Override
+            protected void onPostExecute(JsonDirectionResponse jsonDirectionResponse) {
+                super.onPostExecute(jsonDirectionResponse);
+                showMapWithPoints(jsonDirectionResponse);
+            }
+        }.execute();
+
+
+    }
+
+    private void showMapWithPoints(JsonDirectionResponse jsonDirectionResponse) {
+
+
         MapsInitializer.initialize(this);
         List<MarkerOptions> mapMarkerOptionsList = new ArrayList<>();
         List<PolylineOptions> mapPolylineOptionsList = new ArrayList<>();
@@ -163,8 +243,8 @@ public class TripActivity extends AppCompatActivity implements GoogleApiClient.C
         ArrayList<LatLng> commuteLatLngPoints = new ArrayList<LatLng>();
         PolylineOptions polyLineOptions = new PolylineOptions();
 
-        commuteLatLngPoints.add(mLastLatLng);
-        boundsBuilder.include(mLastLatLng);
+        commuteLatLngPoints.add(mLastKnownLatLng);
+        boundsBuilder.include(mLastKnownLatLng);
         for (int i = 0; i < mTravels.size(); i++) {
             Travel currentPoint = mTravels.get(i);
             //add point on cummute line
@@ -175,7 +255,7 @@ public class TripActivity extends AppCompatActivity implements GoogleApiClient.C
         //FIXME change color
         polyLineOptions.width(getResources().getDimensionPixelSize(R.dimen.map_polyline_walk_width));
         polyLineOptions.color(primaryColor);
-        polyLineOptions.addAll(commuteLatLngPoints);
+        polyLineOptions.addAll(jsonDirectionResponse.allCoords());
         mapPolylineOptionsList.add(polyLineOptions);
 
 
@@ -208,7 +288,6 @@ public class TripActivity extends AppCompatActivity implements GoogleApiClient.C
                 }
             });
         }
-
     }
 
     private void generateMarkers(int count) {
@@ -300,9 +379,9 @@ public class TripActivity extends AppCompatActivity implements GoogleApiClient.C
 
         Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
         if (mLastLocation == null) {
-            mLastLatLng = new LatLng(47.400542, 0.685327);
+            mLastKnownLatLng = new LatLng(47.400542, 0.685327);
         } else {
-            mLastLatLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+            mLastKnownLatLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
         }
         initMap();
     }
