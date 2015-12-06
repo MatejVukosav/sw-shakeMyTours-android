@@ -22,7 +22,7 @@
             android:orientation="vertical">
 
             <com.google.android.gms.maps.MapView
-                android:id="@+id/map_stops_fragment_mapview"
+                android:id="@+id/trip_activity_mapview"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1" />
@@ -31,7 +31,13 @@
                 android:id="@+id/details_container"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1" />
+                android:layout_weight="1">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/trip_activity_recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </FrameLayout>
         </LinearLayout>
     </RelativeLayout>
 

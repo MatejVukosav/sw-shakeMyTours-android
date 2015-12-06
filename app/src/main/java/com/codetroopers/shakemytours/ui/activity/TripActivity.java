@@ -27,9 +27,21 @@ import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.codetroopers.shakemytours.R;
 import com.codetroopers.shakemytours.core.entities.Travel;
 import com.google.android.gms.common.ConnectionResult;
@@ -63,8 +75,10 @@ public class TripActivity extends AppCompatActivity implements GoogleApiClient.C
         return intent;
     }
 
-    @Bind(R.id.map_stops_fragment_mapview)
+    @Bind(R.id.trip_activity_mapview)
     MapView mapView;
+    @Bind(R.id.trip_activity_recyclerview)
+    RecyclerView mRecyclerView;
 
     int primaryColor;
     int accentColor;
@@ -92,6 +106,7 @@ public class TripActivity extends AppCompatActivity implements GoogleApiClient.C
         mapView.onCreate(savedInstanceState);
 
         mTravels = getIntent().getParcelableArrayListExtra(PARAM_TRAVELS);
+        setupRecyclerView();
         buildGoogleApiClient();
     }
 
@@ -257,9 +272,9 @@ public class TripActivity extends AppCompatActivity implements GoogleApiClient.C
     public void onConnected(Bundle bundle) {
 
         Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-        if(mLastLocation == null){
+        if (mLastLocation == null) {
             mLastLatLng = new LatLng(47.400542, 0.685327);
-        }else {
+        } else {
             mLastLatLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
         }
         initMap();
@@ -283,5 +298,92 @@ public class TripActivity extends AppCompatActivity implements GoogleApiClient.C
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
 
+    }
+
+    private void setupRecyclerView() {
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        TravelTripRecyclerViewAdapter mTravelAdapter = new TravelTripRecyclerViewAdapter();
+        mRecyclerView.setAdapter(mTravelAdapter);
+        mRecyclerView.setHasFixedSize(true);
+
+
+    }
+
+    public class TravelTripRecyclerViewAdapter extends RecyclerView.Adapter<TravelTripViewHolder> {
+
+        public TravelTripRecyclerViewAdapter() {
+        }
+
+        @Override
+        public TravelTripViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.trip_list_item, parent, false);
+            return new TravelTripViewHolder(v);
+        }
+
+        @Override
+        public void onBindViewHolder(final TravelTripViewHolder holder, int position) {
+
+            Travel currentItem = mTravels.get(position);
+            holder.setTravel(currentItem);
+            if (currentItem.loading) {
+                holder.mProgressBar.setVisibility(View.VISIBLE);
+                holder.mBackgroundImageView.setVisibility(View.GONE);
+                holder.mContent.setVisibility(View.GONE);
+            } else {
+                holder.mProgressBar.setVisibility(View.GONE);
+                holder.mBackgroundImageView.setVisibility(View.VISIBLE);
+                holder.mContent.setVisibility(View.VISIBLE);
+                holder.mTravelDestinationName.setText(currentItem.name);
+                Glide.with(TripActivity.this).load(currentItem.getResourceId()).centerCrop().into(holder.mBackgroundImageView);
+                if (!currentItem.selected) {
+                    holder.mMenuButton.setImageResource(android.R.color.transparent);
+                }
+            }
+        }
+
+
+        @Override
+        public int getItemCount() {
+            return mTravels.size();
+        }
+
+
+    }
+
+
+    class TravelTripViewHolder extends RecyclerView.ViewHolder {
+        public final View mView;
+        @Bind(R.id.trip_list_item_cardview)
+        CardView mCardView;
+        @Bind(R.id.trip_list_item_background)
+        ImageView mBackgroundImageView;
+        @Bind(R.id.trip_list_item_name)
+        TextView mTravelDestinationName;
+        @Bind(R.id.trip_list_item_menu_button_holder)
+        LinearLayout mButtonHolder;
+        @Bind(R.id.trip_list_item_menu_button)
+        ImageButton mMenuButton;
+        @Bind(R.id.trip_list_item_progressbar)
+        ProgressBar mProgressBar;
+        @Bind(R.id.trip_list_item_content)
+        LinearLayout mContent;
+        @Bind(R.id.trip_list_item_info)
+        ImageView infoImageView;
+        private Travel travel;
+
+        public TravelTripViewHolder(View itemView) {
+            super(itemView);
+            ButterKnife.bind(this, itemView);
+            mView = itemView;
+        }
+
+
+        public void setTravel(Travel travel) {
+            this.travel = travel;
+        }
+
+        public Travel getTravel() {
+            return travel;
+        }
     }
 }
