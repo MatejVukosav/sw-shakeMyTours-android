@@ -13,6 +13,7 @@ public class JsonDirectionResponse {
 
     private class JsonRoutes {
         List<JsonLeg> legs;
+        JsonPolyline overview_polyline;
     }
 
     private class JsonLeg {
@@ -46,6 +47,13 @@ public class JsonDirectionResponse {
             }
         }
         return out;
+    }
+
+    public String getEncodedPolyline(){
+        if(!routes.isEmpty()) {
+            return routes.get(0).overview_polyline.points;
+        }
+        return "";
     }
 
     private class JsonPolyline {
