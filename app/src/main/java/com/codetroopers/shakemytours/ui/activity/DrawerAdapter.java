@@ -33,18 +33,26 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
-        if (position == 0) {
-            viewHolder.name.setText("Home");
-        } else {
-            viewHolder.name.setText("menu " + position);
+        int title;
+        switch (position) {
+            case 0:
+                title = R.string.title_main;
+                break;
+            case 1:
+                title = R.string.title_about;
+                break;
+            default:
+                title = R.string.title_default;
+                break;
         }
+        viewHolder.name.setText(title);
         viewHolder.name.setOnClickListener(v -> mListener.onClick(v, position));
         viewHolder.itemView.setActivated(position == mSelectedItem);
     }
 
     @Override
     public int getItemCount() {
-        return 1;
+        return 2;
     }
 
     public interface OnItemClickListener {
