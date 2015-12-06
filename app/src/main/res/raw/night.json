@@ -1,0 +1,56 @@
+[
+  {
+    "type":"Bars",
+    "address":"Rue des Tanneurs, 37000 Tours",
+    "lat":47.396986,
+    "lgt":"0.684736",
+    "name":"Guinguette de Tours sur Loire",
+    "site":"http://www.tours.fr/453-tours-sur-loire.htm",
+    "tel":"06 20 62 67 17"
+  },
+  {
+    "type":"Bars",
+    "address":"13 rue Grand Marché, 37000 Tours",
+    "lat":null,
+    "lgt":"",
+    "name":"",
+    "site":"https://www.facebook.com/stephane.kolar/",
+    "tel":"02 47 47 11 34"
+  },
+  {
+    "type":"Bars",
+    "address":"91 rue du Commerce 37000 Tours",
+    "lat":null,
+    "lgt":"",
+    "name":"Bars",
+    "site":"https://www.facebook.com/pages/La-Belle-Epoque/140239856022164",
+    "tel":"02 47 05 17 80"
+  },
+  {
+    "type":"Bars",
+    "address":"15 Rue du Grand Marché, 37000 Tours",
+    "lat":47.394552,
+    "lgt":"0.680938",
+    "name":"Paddy Flaherty",
+    "site":"",
+    "tel":"02 47 31 93 50"
+  },
+  {
+    "type":"Bars",
+    "address":"187, Avenue de Grammont, 37000 Tours",
+    "lat":47.376586,
+    "lgt":"0.694381",
+    "name":"Le Corsaire",
+    "site":"",
+    "tel":"02 47 05 20 00"
+  },
+  {
+    "type":"Bars",
+    "address":"Place Plumereau, 37000 Tours",
+    "lat":47.400023,
+    "lgt":"0.681022",
+    "name":"Place Plumereau",
+    "site":"placeplumereau.com",
+    "tel":"02 47 70 37 37"
+  }
+]
