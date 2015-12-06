@@ -26,13 +26,16 @@ import android.graphics.Rect;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.ShareActionProvider;
 import android.support.v7.widget.Toolbar;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,6 +48,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.codetroopers.shakemytours.R;
 import com.codetroopers.shakemytours.core.entities.Travel;
+import com.codetroopers.shakemytours.util.Strings;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
@@ -58,6 +62,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.common.collect.Lists;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,6 +76,7 @@ public class TripActivity extends AppCompatActivity implements GoogleApiClient.C
     public static final String PARAM_TRAVELS = "PARAM_TRAVELS";
     private SparseArray<Bitmap> mMarkerList;
     private SparseArray<Integer> mAvailableColors;
+    private ShareActionProvider mShareActionProvider;
 
     public static Intent newIntent(Context context, ArrayList<Travel> selectedTravels) {
         Intent intent = new Intent(context, TripActivity.class);
@@ -306,6 +312,35 @@ public class TripActivity extends AppCompatActivity implements GoogleApiClient.C
     @Override
     public void onConnectionSuspended(int i) {
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate menu resource file.
+        getMenuInflater().inflate(R.menu.menu_shake, menu);
+
+        // Locate MenuItem with ShareActionProvider
+        MenuItem item = menu.findItem(R.id.action_share);
+
+        // Fetch and store ShareActionProvider
+        mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
+
+        mShareActionProvider.setShareIntent(createShareIntent());
+        // Return true to display menu
+        return true;
+    }
+
+    private Intent createShareIntent() {
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        List<String> names = Lists.newArrayList();
+        for(Travel travel : mTravels){
+            names.add(travel.name);
+        }
+
+        String textToShare = "This is a great shake ("+ Strings.join("->",names)+"), SHAKE it out !";
+        shareIntent.putExtra(Intent.EXTRA_TEXT, textToShare);
+        return shareIntent;
     }
 
     @Override
