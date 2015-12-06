@@ -33,6 +33,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.ShareActionProvider;
@@ -447,11 +448,11 @@ public class TripActivity extends AppCompatActivity implements GoogleApiClient.C
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setType("text/plain");
         List<String> names = Lists.newArrayList();
-        for(Travel travel : mTravels){
+        for (Travel travel : mTravels) {
             names.add(travel.name);
         }
 
-        String textToShare = "This is a great shake ("+ Strings.join("->",names)+"), SHAKE it out !";
+        String textToShare = "This is a great shake (" + Strings.join("->", names) + "), SHAKE it out !";
         shareIntent.putExtra(Intent.EXTRA_TEXT, textToShare);
         return shareIntent;
     }
@@ -520,6 +521,8 @@ public class TripActivity extends AppCompatActivity implements GoogleApiClient.C
         LinearLayout mLayoutDetail;
         @Bind(R.id.trip_list_item_detail_image)
         ImageView mImageDetail;
+        @Bind(R.id.trip_list_item_cardview)
+        CardView card;
         private Travel travel;
 
         public TravelTripViewHolder(View itemView) {
@@ -538,6 +541,15 @@ public class TripActivity extends AppCompatActivity implements GoogleApiClient.C
             };
             mImageDetail.setOnClickListener(onClickDetailListener);
             mLayoutDetail.setOnClickListener(onClickDetailListener);
+
+
+            card.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    CameraUpdate cameraInit = CameraUpdateFactory.newLatLngZoom(travel.toLatLng(), 20);
+                    map.animateCamera(cameraInit);
+                }
+            });
         }
 
 
