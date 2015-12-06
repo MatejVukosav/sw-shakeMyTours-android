@@ -33,10 +33,11 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
-        if(position == 0){
+        if (position == 0) {
             viewHolder.name.setText("Home");
+        } else {
+            viewHolder.name.setText("menu " + position);
         }
-        viewHolder.name.setText("menu " + position);
         viewHolder.name.setOnClickListener(v -> mListener.onClick(v, position));
         viewHolder.itemView.setActivated(position == mSelectedItem);
     }
