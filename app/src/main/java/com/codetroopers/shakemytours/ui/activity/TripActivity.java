@@ -26,19 +26,16 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.Rect;
 import android.location.Location;
-import android.os.Build;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.MenuItemCompat;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.ShareActionProvider;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -51,9 +48,8 @@ import android.widget.TextView;
 
 import com.codetroopers.shakemytours.R;
 import com.codetroopers.shakemytours.core.entities.Travel;
-import com.codetroopers.shakemytours.util.Strings;
 import com.codetroopers.shakemytours.service.JsonDirectionResponse;
-import com.codetroopers.shakemytours.util.TravelItemFactory;
+import com.codetroopers.shakemytours.util.Strings;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
@@ -66,9 +62,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Lists;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -547,7 +541,9 @@ public class TripActivity extends AppCompatActivity implements GoogleApiClient.C
                 @Override
                 public void onClick(View v) {
                     CameraUpdate cameraInit = CameraUpdateFactory.newLatLngZoom(travel.toLatLng(), 15);
-                    map.animateCamera(cameraInit);
+                    if(map != null) {
+                        map.animateCamera(cameraInit);
+                    }
                 }
             });
         }

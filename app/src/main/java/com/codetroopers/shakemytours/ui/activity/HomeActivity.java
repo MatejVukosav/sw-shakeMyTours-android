@@ -371,6 +371,7 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
                 mTravelsDatas.clear();
                 mDrawerAdapter.notifyItemRangeRemoved(0, 5);
                 mRecyclerView.setVisibility(View.GONE);
+                mRecyclerView.scrollToPosition(0);
                 mTelImg.setVisibility(View.VISIBLE);
                 mShakeItTitle.setVisibility(View.VISIBLE);
                 mShakeItTitle.setAlpha(1);
