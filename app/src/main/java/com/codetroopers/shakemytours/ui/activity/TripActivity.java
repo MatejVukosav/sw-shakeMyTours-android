@@ -31,6 +31,7 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -68,6 +69,8 @@ public class TripActivity extends AppCompatActivity implements GoogleApiClient.C
 
 
     public static final String PARAM_TRAVELS = "PARAM_TRAVELS";
+    private SparseArray<Bitmap> mMarkerList;
+    private SparseArray<Integer> mAvailableColors;
 
     public static Intent newIntent(Context context, ArrayList<Travel> selectedTravels) {
         Intent intent = new Intent(context, TripActivity.class);
@@ -81,7 +84,6 @@ public class TripActivity extends AppCompatActivity implements GoogleApiClient.C
     RecyclerView mRecyclerView;
 
     int primaryColor;
-    int accentColor;
     @Nullable
     private GoogleMap map;
 
@@ -97,17 +99,29 @@ public class TripActivity extends AppCompatActivity implements GoogleApiClient.C
         setContentView(R.layout.activity_trip);
         ButterKnife.bind(this);
 
+
+        mTravels = getIntent().getParcelableArrayListExtra(PARAM_TRAVELS);
+
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        initAvailableColors();
+        generateMarkers(mTravels.size());
         primaryColor = getResources().getColor(R.color.colorPrimary);
-        accentColor = getResources().getColor(R.color.colorAccent);
-        mapView.onCreate(savedInstanceState);
 
-        mTravels = getIntent().getParcelableArrayListExtra(PARAM_TRAVELS);
+        mapView.onCreate(savedInstanceState);
         setupRecyclerView();
         buildGoogleApiClient();
+    }
+
+    private void initAvailableColors() {
+        mAvailableColors = new SparseArray<>();
+        mAvailableColors.put(0, getResources().getColor(R.color.map_marker_0));
+        mAvailableColors.put(1, getResources().getColor(R.color.map_marker_1));
+        mAvailableColors.put(2, getResources().getColor(R.color.map_marker_2));
+        mAvailableColors.put(3, getResources().getColor(R.color.map_marker_3));
+        mAvailableColors.put(4, getResources().getColor(R.color.map_marker_4));
     }
 
     protected synchronized void buildGoogleApiClient() {
@@ -131,7 +145,6 @@ public class TripActivity extends AppCompatActivity implements GoogleApiClient.C
         List<MarkerOptions> mapMarkerOptionsList = new ArrayList<>();
         List<PolylineOptions> mapPolylineOptionsList = new ArrayList<>();
 
-        Bitmap intermediateMarker = createIntermediateMarker();
         final LatLngBounds.Builder boundsBuilder = new LatLngBounds.Builder();
 
         for (int y = 0; y < mTravels.size(); y++) {
@@ -140,7 +153,7 @@ public class TripActivity extends AppCompatActivity implements GoogleApiClient.C
             mapMarkerOptionsList.add(new MarkerOptions()
                     .position(currentTravel.toLatLng())
                     .title(currentTravel.name)
-                    .icon(BitmapDescriptorFactory.fromBitmap(intermediateMarker)));
+                    .icon(BitmapDescriptorFactory.fromBitmap(mMarkerList.get(y))));
         }
 
         ArrayList<LatLng> commuteLatLngPoints = new ArrayList<LatLng>();
@@ -194,7 +207,17 @@ public class TripActivity extends AppCompatActivity implements GoogleApiClient.C
 
     }
 
-    private Bitmap createIntermediateMarker() {
+    private void generateMarkers(int count) {
+        mMarkerList = new SparseArray<>();
+        for (int i = 0; i < count; i++) {
+            Bitmap intermediateMarker = createIntermediateMarker(i);
+            mMarkerList.put(i, intermediateMarker);
+        }
+
+    }
+
+    private Bitmap createIntermediateMarker(int position) {
+        int accentColor = mAvailableColors.get(position);
         return createMarker(
                 getResources().getDimensionPixelSize(R.dimen.map_marker_radius),
                 getResources().getDimensionPixelSize(R.dimen.map_marker_stroke),
@@ -335,9 +358,7 @@ public class TripActivity extends AppCompatActivity implements GoogleApiClient.C
                 holder.mContent.setVisibility(View.VISIBLE);
                 holder.mTravelDestinationName.setText(currentItem.name);
                 Glide.with(TripActivity.this).load(currentItem.getResourceId()).centerCrop().into(holder.mBackgroundImageView);
-                if (!currentItem.selected) {
-                    holder.mMenuButton.setImageResource(android.R.color.transparent);
-                }
+                holder.mMenuButton.setImageBitmap(mMarkerList.get(position));
             }
         }
 
