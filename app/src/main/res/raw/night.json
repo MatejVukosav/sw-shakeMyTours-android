@@ -1,38 +1,42 @@
 [
   {
-    "type":"Bars",
-    "address":"Rue des Tanneurs, 37000 Tours",
-    "lat":47.396986,
-    "lgt":0.684736,
-    "name":"Guinguette de Tours sur Loire",
-    "site":"http://www.tours.fr/453-tours-sur-loire.htm",
-    "tel":"06 20 62 67 17"
+    "type": "Bars",
+    "address": "Rue des Tanneurs, 37000 Tours",
+    "lat": 47.396986,
+    "lgt": 0.684736,
+    "name": "Guinguette de Tours sur Loire",
+    "site": "http://www.tours.fr/453-tours-sur-loire.htm",
+    "tel": "06 20 62 67 17",
+    "file": "2"
   },
   {
-    "type":"Bars",
-    "address":"15 Rue du Grand Marché, 37000 Tours",
-    "lat":47.394552,
-    "lgt":0.680938,
-    "name":"Paddy Flaherty",
-    "site":"http://",
-    "tel":"02 47 31 93 50"
+    "type": "Bars",
+    "address": "15 Rue du Grand Marché, 37000 Tours",
+    "lat": 47.394552,
+    "lgt": 0.680938,
+    "name": "Paddy Flaherty",
+    "site": "http://",
+    "tel": "02 47 31 93 50",
+    "file": "2"
   },
   {
-    "type":"Bars",
-    "address":"187, Avenue de Grammont, 37000 Tours",
-    "lat":47.376586,
-    "lgt":0.694381,
-    "name":"Le Corsaire",
-    "site":"http://",
-    "tel":"02 47 05 20 00"
+    "type": "Bars",
+    "address": "187, Avenue de Grammont, 37000 Tours",
+    "lat": 47.376586,
+    "lgt": 0.694381,
+    "name": "Le Corsaire",
+    "site": "http://",
+    "tel": "02 47 05 20 00",
+    "file": "2"
   },
   {
-    "type":"Bars",
-    "address":"Place Plumereau, 37000 Tours",
-    "lat":47.400023,
-    "lgt":0.681022,
-    "name":"Place Plumereau",
-    "site":"http://placeplumereau.com",
-    "tel":"02 47 70 37 37"
+    "type": "Bars",
+    "address": "Place Plumereau, 37000 Tours",
+    "lat": 47.400023,
+    "lgt": 0.681022,
+    "name": "Place Plumereau",
+    "site": "http://placeplumereau.com",
+    "tel": "02 47 70 37 37",
+    "file": "2"
   }
 ]

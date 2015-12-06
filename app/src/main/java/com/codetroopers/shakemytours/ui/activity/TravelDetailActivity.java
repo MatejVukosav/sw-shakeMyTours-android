@@ -128,7 +128,7 @@ public class TravelDetailActivity extends AppCompatActivity {
     }
 
     private void loadBackdrop(Travel travel) {
-        Glide.with(this).load(travel.backgroundImage).centerCrop().into(imageView);
+        Glide.with(this).load(travel.getResourceId()).centerCrop().into(imageView);
     }
 
 }

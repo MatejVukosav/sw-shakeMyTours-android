@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.DrawableRes;
 
+import com.codetroopers.shakemytours.R;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.common.base.Objects;
 import com.google.gson.annotations.SerializedName;
@@ -31,7 +32,7 @@ public class Travel implements Parcelable {
     @SerializedName("lgt")
     public String longitude;
     @SerializedName("file")
-    public String file;
+    public int fileId;
 
 
     public Travel() {
@@ -81,6 +82,16 @@ public class Travel implements Parcelable {
         return this;
     }
 
+    public int getResourceId() {
+        switch (fileId) {
+            case 1:
+                return R.drawable.vin;
+            case 2:
+                return R.drawable.bar;
+            default:
+                return R.drawable.noel;
+        }
+    }
 
     @Override
     public int describeContents() {

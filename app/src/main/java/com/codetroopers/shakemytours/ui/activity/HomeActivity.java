@@ -412,8 +412,7 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
                 holder.mBackgroundImageView.setVisibility(View.VISIBLE);
                 holder.mContent.setVisibility(View.VISIBLE);
                 holder.mTravelDestinationName.setText(currentItem.name);
-                int backgroundImage = currentItem.backgroundImage;
-                Glide.with(HomeActivity.this).load(backgroundImage).centerCrop().into(holder.mBackgroundImageView);
+                Glide.with(HomeActivity.this).load(currentItem.getResourceId()).centerCrop().into(holder.mBackgroundImageView);
                 if (!currentItem.selected) {
                     holder.mMenuButton.setImageResource(android.R.color.transparent);
                 }
