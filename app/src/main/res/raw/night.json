@@ -10,24 +10,6 @@
   },
   {
     "type":"Bars",
-    "address":"13 rue Grand Marché, 37000 Tours",
-    "lat":null,
-    "lgt":,
-    "name":"",
-    "site":"https://www.facebook.com/stephane.kolar/",
-    "tel":"02 47 47 11 34"
-  },
-  {
-    "type":"Bars",
-    "address":"91 rue du Commerce 37000 Tours",
-    "lat":null,
-    "lgt":,
-    "name":"Bars",
-    "site":"https://www.facebook.com/pages/La-Belle-Epoque/140239856022164",
-    "tel":"02 47 05 17 80"
-  },
-  {
-    "type":"Bars",
     "address":"15 Rue du Grand Marché, 37000 Tours",
     "lat":47.394552,
     "lgt":0.680938,

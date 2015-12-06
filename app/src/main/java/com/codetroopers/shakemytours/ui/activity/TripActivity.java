@@ -25,7 +25,6 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.location.Location;
 import android.os.Bundle;
-import android.os.Parcel;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -112,8 +111,8 @@ public class TripActivity extends AppCompatActivity implements GoogleApiClient.C
 
         List<Travel> fakeTravel = Lists.newArrayList();
         fakeTravel.add(TravelItemFactory.getMorning1(this));
-        fakeTravel.add(TravelItemFactory.getMorning2());
-        fakeTravel.add(TravelItemFactory.getLunch());
+        fakeTravel.add(TravelItemFactory.getMorning2(this));
+        fakeTravel.add(TravelItemFactory.getLunch(this));
 
         MapsInitializer.initialize(this);
         List<MarkerOptions> mapMarkerOptionsList = new ArrayList<>();

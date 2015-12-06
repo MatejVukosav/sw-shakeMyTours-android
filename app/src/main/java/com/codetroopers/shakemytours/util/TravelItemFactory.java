@@ -22,23 +22,27 @@ import timber.log.Timber;
 public class TravelItemFactory {
 
 
+    private static List<Travel> travelActivities;
+    private static List<Travel> travelLunch;
+    private static List<Travel> travelNight;
+
     public static Travel getRandomFoodEvent(Context context, int i) {
         switch (i) {
             case 0:
                 return getMorning1(context);
             case 1:
-                return getMorning2();
+                return getMorning2(context);
             case 2:
-                return getLunch();
+                return getLunch(context);
             case 3:
-                return getAfternoon1();
+                return getAfternoon1(context);
             default:
             case 4:
-                return getAfternoon2();
+                return getAfternoon2(context);
         }
     }
 
-    public static List<Travel> loadData(Context context,@RawRes int fileResourceId){
+    public static List<Travel> loadData(Context context, @RawRes int fileResourceId) {
         List<Travel> travels = null;
         InputStream inputStream;
         BufferedReader reader = null;
@@ -64,66 +68,43 @@ public class TravelItemFactory {
         return travels;
     }
 
-//    public static Travel getRandomTravel(int position) {
-//        switch (position) {
-//            case 0:
-//                return getMorning1();
-//            case 1:
-//                return getLunch();
-//            case 2:
-//                return getAfternoon1();
-//            case 3:
-//                return getAfternoon2();
-//            case 4:
-//                return getMorning2();
-//        }
-//        return null;
-//    }
-
     public static Travel getMorning1(Context context) {
-        List<Travel> travels = loadData(context, R.raw.activity);
-//        return new Travel()
-//                .setName("Morning" + Strings.nextSessionId())
-//                .setDistance("10km")
-//                .setTelephone("20€")
-//                .setBackground(R.drawable.lake)
-//                .setCoords("47.421142", "0.700384");
+        if (travelActivities == null) {
+            travelActivities = loadData(context, R.raw.activity);
+        }
+        return getRandomItemFrom(travelActivities);
+    }
+
+    private static Travel getRandomItemFrom(List<Travel> travels) {
         return travels.get(Strings.randInt(travels.size()));
     }
 
-
-    public static Travel getMorning2() {
-        return new Travel()
-                .setName("Afternoon " + Strings.nextSessionId())
-                .setDistance("10km")
-                .setTelephone("20€")
-                .setBackground(R.drawable.noel)
-                .setCoords("47.412582", "0.68545");
+    public static Travel getMorning2(Context context) {
+        if (travelActivities == null) {
+            travelActivities = loadData(context, R.raw.activity);
+        }
+        return getRandomItemFrom(travelActivities);
     }
 
 
-    public static Travel getLunch() {
-        return new Travel()
-                .setName("Launch " + Strings.nextSessionId())
-                .setDistance("10km")
-                .setTelephone("20€")
-                .setBackground(R.drawable.vin)
-                .setCoords("47.366353", "0.677934");
+    public static Travel getLunch(Context context) {
+        if (travelLunch == null) {
+            travelLunch = loadData(context, R.raw.restaurant);
+        }
+        return getRandomItemFrom(travelLunch);
     }
 
-    public static Travel getAfternoon1() {
-        return new Travel()
-                .setName("AfterNoon " + Strings.nextSessionId())
-                .setDistance("10km")
-                .setTelephone("20€")
-                .setBackground(R.drawable.musee);
+    public static Travel getAfternoon1(Context context) {
+        if (travelActivities == null) {
+            travelActivities = loadData(context, R.raw.activity);
+        }
+        return getRandomItemFrom(travelActivities);
     }
 
-    public static Travel getAfternoon2() {
-        return new Travel()
-                .setName("Afternoon " + Strings.nextSessionId())
-                .setDistance("10km")
-                .setTelephone("20€")
-                .setBackground(R.drawable.shop);
+    public static Travel getAfternoon2(Context context) {
+        if (travelNight == null) {
+            travelNight = loadData(context, R.raw.night);
+        }
+        return getRandomItemFrom(travelNight);
     }
 }

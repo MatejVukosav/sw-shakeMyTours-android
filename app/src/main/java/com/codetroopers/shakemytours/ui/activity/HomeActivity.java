@@ -112,7 +112,7 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
 
 //        FIXME remove for real run
 //        onShake();
-        soundEnable = false ;
+        soundEnable = false;
 
         mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -181,18 +181,18 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
                 mShakeItTitle.setVisibility(View.GONE);
                 mRecyclerView.setVisibility(View.VISIBLE);
                 if (mTravelsDatas.isEmpty()) {
-                    mTravelsDatas.add(0, TravelItemFactory.getRandomFoodEvent(HomeActivity.this,0));
-                    mTravelsDatas.add(1, TravelItemFactory.getRandomFoodEvent(HomeActivity.this,1));
-                    mTravelsDatas.add(2, TravelItemFactory.getRandomFoodEvent(HomeActivity.this,2));
-                    mTravelsDatas.add(3, TravelItemFactory.getRandomFoodEvent(HomeActivity.this,3));
-                    mTravelsDatas.add(4, TravelItemFactory.getRandomFoodEvent(HomeActivity.this,4));
+                    mTravelsDatas.add(0, TravelItemFactory.getRandomFoodEvent(HomeActivity.this, 0));
+                    mTravelsDatas.add(1, TravelItemFactory.getRandomFoodEvent(HomeActivity.this, 1));
+                    mTravelsDatas.add(2, TravelItemFactory.getRandomFoodEvent(HomeActivity.this, 2));
+                    mTravelsDatas.add(3, TravelItemFactory.getRandomFoodEvent(HomeActivity.this, 3));
+                    mTravelsDatas.add(4, TravelItemFactory.getRandomFoodEvent(HomeActivity.this, 4));
                 } else {
                     for (int i = 0; i < mTravelsDatas.size(); i++) {
                         Travel travel = mTravelsDatas.get(i);
                         travel.loading = false;
                         if (!travel.selected) {
                             //Upadte my travel item
-                            mTravelsDatas.set(i, TravelItemFactory.getRandomFoodEvent(HomeActivity.this,i));
+                            mTravelsDatas.set(i, TravelItemFactory.getRandomFoodEvent(HomeActivity.this, i));
                         }
                     }
                 }
@@ -207,13 +207,13 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
     }
 
     private void stopMaracas() {
-        if(soundEnable) {
+        if (soundEnable) {
             mp.stop();
         }
     }
 
     private void playMaracas() {
-        if(soundEnable) {
+        if (soundEnable) {
             mp = MediaPlayer.create(getApplicationContext(), R.raw.maracas);
             mp.setLooping(true);
             mp.start();
@@ -414,7 +414,7 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
                 holder.mTravelDestinationName.setText(currentItem.name);
                 int backgroundImage = currentItem.backgroundImage;
                 Glide.with(HomeActivity.this).load(backgroundImage).centerCrop().into(holder.mBackgroundImageView);
-                if(!currentItem.selected){
+                if (!currentItem.selected) {
                     holder.mMenuButton.setImageResource(android.R.color.transparent);
                 }
             }
@@ -436,7 +436,7 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
             mTravelsDatas.get(position).selected = false;
             final Travel remove = mTravelsDatas.remove(position);
             notifyItemRemoved(position);
-            mTravelsDatas.add(position, TravelItemFactory.getRandomFoodEvent(HomeActivity.this,position));
+            mTravelsDatas.add(position, TravelItemFactory.getRandomFoodEvent(HomeActivity.this, position));
             notifyItemInserted(position);
         }
 

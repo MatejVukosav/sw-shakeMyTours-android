@@ -91,15 +91,6 @@
   },
   {
     "type":"Restauration",
-    "address":"65 Rue Colbert, 37000 Tours",
-    "lat":null,
-    "lgt":,
-    "name":"Le Surya",
-    "site":"surya-restaurant-indien-37.fr",
-    "tel":""
-  },
-  {
-    "type":"Restauration",
     "address":"26, rue Colbert 37000 Tours",
     "lat":47.395864,
     "lgt":0.688107,
