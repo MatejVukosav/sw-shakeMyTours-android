@@ -13,7 +13,7 @@ android {
         applicationId "com.codetroopers.shakemytours"
         minSdkVersion 14
         targetSdkVersion 23
-        versionCode 4
+        versionCode 5
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         testFunctionalTest true
@@ -22,6 +22,10 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            versionNameSuffix '.dev'
+            applicationIdSuffix ".dev"
         }
     }
 
