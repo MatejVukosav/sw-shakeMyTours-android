@@ -25,7 +25,11 @@
     <dimen name="detail_backdrop_height">256dp</dimen>
     <dimen name="progress_bar_size">24dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
-
+    <dimen name="aboutImage_openSource">72dp</dimen>
+    <dimen name="textSizeVeryLarge_openSource">32sp</dimen>
+    <dimen name="textSizeLarge_openSource">20sp</dimen>
+    <dimen name="textSizeMedium_openSource">14sp</dimen>
+    <dimen name="textSizeSmall_openSource">10sp</dimen>
 
     <dimen name="map_big_marker_radius">10dp</dimen>
     <dimen name="map_marker_radius">7dp</dimen>

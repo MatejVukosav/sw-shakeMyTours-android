@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Shake My Tours</string>
+    <string name="app_name">ShakeMyTours</string>
     <string name="title_activity_home">Home</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -19,4 +19,9 @@
     <string name="shaking">SHAKING...</string>
     <string name="action_reset">Remise à zéro</string>
     <string name="trip_detail_title">Détail de votre journée</string>
+    <string name="activty_about_content_1">bla</string>
+    <string name="activty_about_content_2">bla2</string>
+    <string name="title_about">À propos</string>
+    <string name="title_main">Home</string>
+    <string name="title_default">Menu entry</string>
 </resources>

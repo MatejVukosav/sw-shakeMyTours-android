@@ -292,6 +292,7 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
     protected void onResume() {
         super.onResume();
         mSensorManager.registerListener(mShakeDetector, mAccelerometer, SensorManager.SENSOR_DELAY_UI);
+        selectItem(0);
     }
 
     @Override
@@ -319,7 +320,6 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
             @Override
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
-                invalidateOptionsMenu();
             }
         };
         mDrawer.setDrawerListener(mDrawerToggle);
@@ -391,7 +391,11 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
     private void selectItem(int position) {
         mDrawer.closeDrawer(mDrawerList);
         mDrawerAdapter.setActive(position);
+        if (position == 1) {
+            startActivity(AboutActivity.newIntent(this));
+        }
     }
+
 
     @Override
     public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
