@@ -16,7 +16,7 @@
     the big cheese.</string>
     <string name="detail_title">Travel Detail</string>
     <string name="shakeIt">SHAKE IT</string>
-    <string name="shaking">SHAKING...</string>
+    <string name="shaking">SHAKING…</string>
     <string name="action_reset">Remise à zéro</string>
     <string name="trip_detail_title">Détail de votre journée</string>
     <string name="activty_about_content_1">"ShakeMyTours est une application mobile gratuite qui vous permet de découvrir activités par jour près de vous via la géolocalisation en secouant (Shake) votre mobile. Cet outil pratique vous permettra de choisir vos activités en fonction de vos goûts et de vos envies en sélectionnant les activités qui vous plaisent et en shakant de nouveau pour obtenir d’autres résultats. Parmi ces activités vous trouverez de la restauration, des visites culturelles, du sport et de l’art, du ludique et de l’insolite…
@@ -26,4 +26,5 @@ Donc, n’hésitez plus ! SECOUEZ, DECOUVREZ, PARTAGEZ !"</string>
     <string name="title_about">À propos</string>
     <string name="title_main">Home</string>
     <string name="title_default">Menu entry</string>
+    <string name="activty_about_team">"ShakeMyTours est le fruit de la collaboration de Thibault, Cédric, Florian, Thanh, Romain, Vincent, Margot, Louis, Nabile, Claude, Baptiste et Sarah"</string>
 </resources>

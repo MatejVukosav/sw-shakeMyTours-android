@@ -21,6 +21,8 @@ public class AboutActivity extends BaseActionBarActivity {
     ImageView swImage;
     @Bind(R.id.about_activity_frenchtech)
     ImageView frenchTechImage;
+    @Bind(R.id.about_activity_team)
+    ImageView teamImage;
 
     public static Intent newIntent(Context context) {
         Intent intent = new Intent(context, AboutActivity.class);
@@ -37,6 +39,7 @@ public class AboutActivity extends BaseActionBarActivity {
         setTitle(getResources().getString(R.string.title_about));
         Glide.with(AboutActivity.this).load(R.drawable.sw).fitCenter().into(swImage);
         Glide.with(AboutActivity.this).load(R.drawable.frenchtech).fitCenter().into(frenchTechImage);
+        Glide.with(AboutActivity.this).load(R.drawable.team).centerCrop().into(teamImage);
     }
 
     @Override
