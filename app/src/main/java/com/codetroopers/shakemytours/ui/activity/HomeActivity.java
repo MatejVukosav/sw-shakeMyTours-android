@@ -183,6 +183,8 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
 
             @Override
             public void run() {
+                invalidateOptionsMenu();
+
                 stopMaracas();
                 mDrawer.setBackgroundColor(getResources().getColor(R.color.white));
                 mTelImgAnim.clearAnimation();
@@ -351,7 +353,7 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
     public boolean onPrepareOptionsMenu(Menu menu) {
         // If the nav drawer is open, hide action items related to the content view
         boolean drawerOpen = mDrawer.isDrawerOpen(mDrawerList);
-        menu.findItem(R.id.action_reset).setVisible(!drawerOpen);
+        menu.findItem(R.id.action_reset).setVisible(!drawerOpen && !mTravelsDatas.isEmpty());
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -375,6 +377,7 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
                 mShakeItTitle.setText(R.string.shakeIt);
                 setFabVisible(false);
                 mDrawer.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                invalidateOptionsMenu();
                 return true;
         }
         return super.onOptionsItemSelected(item);
