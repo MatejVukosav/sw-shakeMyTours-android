@@ -12,27 +12,23 @@ import java.io.Serializable;
 
 public class Travel implements Parcelable {
 
-    @SerializedName("SyndicObjectName")
+    @SerializedName("name")
     public String name;
-    @SerializedName("ObjectTypeName")
+    @SerializedName("distance")
     public String distance;
-    @SerializedName("DetailTel")
+    @SerializedName("tel")
     public String telephone;
-    @SerializedName("DetailSiteweb")
+    @SerializedName("site")
     public String siteWeb;
-    @SerializedName("DetailAdresse1")
+    @SerializedName("address")
     public String address1;
-    @SerializedName("DetailAdresse2")
-    public String address2;
-    @SerializedName("DetailCommune")
-    public String city;
-    @SerializedName("DetailCodePostal")
-    public String zipCode;
     public boolean selected;
     @DrawableRes
     public int backgroundImage;
     public boolean loading;
+    @SerializedName("lat")
     public String latitude;
+    @SerializedName("lgt")
     public String longitude;
 
 
@@ -46,9 +42,6 @@ public class Travel implements Parcelable {
         telephone = in.readString();
         siteWeb = in.readString();
         address1 = in.readString();
-        address2 = in.readString();
-        city = in.readString();
-        zipCode = in.readString();
         selected = in.readByte() != 0;
         backgroundImage = in.readInt();
         loading = in.readByte() != 0;
@@ -99,16 +92,13 @@ public class Travel implements Parcelable {
         dest.writeString(telephone);
         dest.writeString(siteWeb);
         dest.writeString(address1);
-        dest.writeString(address2);
-        dest.writeString(city);
-        dest.writeString(zipCode);
         dest.writeByte((byte) (selected ? 1 : 0));
         dest.writeInt(backgroundImage);
         dest.writeByte((byte) (loading ? 1 : 0));
     }
 
     public String getAddress() {
-        return address1 + "\n" + address2 + "\n" + zipCode + "\n" + city;
+        return address1;
     }
 
     public Travel setCoords(String lat, String lng) {

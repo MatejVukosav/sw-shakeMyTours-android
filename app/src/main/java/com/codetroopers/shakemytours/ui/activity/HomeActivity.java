@@ -181,18 +181,18 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
                 mShakeItTitle.setVisibility(View.GONE);
                 mRecyclerView.setVisibility(View.VISIBLE);
                 if (mTravelsDatas.isEmpty()) {
-                    mTravelsDatas.add(0, TravelItemFactory.getRandomFoodEvent(0));
-                    mTravelsDatas.add(1, TravelItemFactory.getRandomFoodEvent(1));
-                    mTravelsDatas.add(2, TravelItemFactory.getRandomFoodEvent(2));
-                    mTravelsDatas.add(3, TravelItemFactory.getRandomFoodEvent(3));
-                    mTravelsDatas.add(4, TravelItemFactory.getRandomFoodEvent(4));
+                    mTravelsDatas.add(0, TravelItemFactory.getRandomFoodEvent(HomeActivity.this,0));
+                    mTravelsDatas.add(1, TravelItemFactory.getRandomFoodEvent(HomeActivity.this,1));
+                    mTravelsDatas.add(2, TravelItemFactory.getRandomFoodEvent(HomeActivity.this,2));
+                    mTravelsDatas.add(3, TravelItemFactory.getRandomFoodEvent(HomeActivity.this,3));
+                    mTravelsDatas.add(4, TravelItemFactory.getRandomFoodEvent(HomeActivity.this,4));
                 } else {
                     for (int i = 0; i < mTravelsDatas.size(); i++) {
                         Travel travel = mTravelsDatas.get(i);
                         travel.loading = false;
                         if (!travel.selected) {
                             //Upadte my travel item
-                            mTravelsDatas.set(i, TravelItemFactory.getRandomFoodEvent(i));
+                            mTravelsDatas.set(i, TravelItemFactory.getRandomFoodEvent(HomeActivity.this,i));
                         }
                     }
                 }
@@ -436,7 +436,7 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
             mTravelsDatas.get(position).selected = false;
             final Travel remove = mTravelsDatas.remove(position);
             notifyItemRemoved(position);
-            mTravelsDatas.add(position, TravelItemFactory.getRandomFoodEvent(position));
+            mTravelsDatas.add(position, TravelItemFactory.getRandomFoodEvent(HomeActivity.this,position));
             notifyItemInserted(position);
         }
 

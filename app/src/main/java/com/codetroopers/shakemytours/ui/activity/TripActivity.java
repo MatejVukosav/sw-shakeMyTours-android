@@ -111,7 +111,7 @@ public class TripActivity extends AppCompatActivity implements GoogleApiClient.C
     private void initMap() {
 
         List<Travel> fakeTravel = Lists.newArrayList();
-        fakeTravel.add(TravelItemFactory.getMorning1());
+        fakeTravel.add(TravelItemFactory.getMorning1(this));
         fakeTravel.add(TravelItemFactory.getMorning2());
         fakeTravel.add(TravelItemFactory.getLunch());
 
