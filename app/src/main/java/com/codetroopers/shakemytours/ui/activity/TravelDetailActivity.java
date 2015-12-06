@@ -25,7 +25,9 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -55,6 +57,12 @@ public class TravelDetailActivity extends AppCompatActivity {
     TextView phoneText;
     @Bind(R.id.detail_travel_site)
     TextView siteText;
+    @Bind(R.id.detail_travel_layout_location)
+    LinearLayout locationLayout;
+    @Bind(R.id.detail_travel_layout_phone)
+    LinearLayout phoneLayout;
+    @Bind(R.id.detail_travel_layout_site)
+    LinearLayout siteLayout;
 
 
     public static Intent newIntent(Context context, Travel travel) {
@@ -90,6 +98,23 @@ public class TravelDetailActivity extends AppCompatActivity {
         siteImage.setColorFilter(colorFilter);
         phoneImage.setColorFilter(colorFilter);
         locationText.setText(travel.getAddress());
+
+
+        if (travel.telephone == null || travel.telephone.equals("")) {
+            phoneLayout.setVisibility(View.GONE);
+        } else {
+            phoneText.setText(travel.telephone);
+        }
+        if (travel.siteWeb == null || travel.siteWeb.equals("")) {
+            siteLayout.setVisibility(View.GONE);
+        } else {
+            siteText.setText(travel.siteWeb);
+        }
+        if (travel.getAddress() == null || travel.getAddress().equals("")) {
+            locationLayout.setVisibility(View.GONE);
+        } else {
+            locationText.setText(travel.getAddress());
+        }
     }
 
     @Override
