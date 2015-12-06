@@ -546,7 +546,7 @@ public class TripActivity extends AppCompatActivity implements GoogleApiClient.C
             card.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    CameraUpdate cameraInit = CameraUpdateFactory.newLatLngZoom(travel.toLatLng(), 20);
+                    CameraUpdate cameraInit = CameraUpdateFactory.newLatLngZoom(travel.toLatLng(), 15);
                     map.animateCamera(cameraInit);
                 }
             });
