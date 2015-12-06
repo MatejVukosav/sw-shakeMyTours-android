@@ -18,6 +18,7 @@ package com.codetroopers.shakemytours.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -27,6 +28,7 @@ import android.graphics.PorterDuffColorFilter;
 import android.graphics.Rect;
 import android.location.Location;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.MenuItemCompat;
@@ -49,6 +51,7 @@ import android.widget.TextView;
 import com.codetroopers.shakemytours.R;
 import com.codetroopers.shakemytours.core.entities.Travel;
 import com.codetroopers.shakemytours.service.JsonDirectionResponse;
+import com.codetroopers.shakemytours.util.PermissionUtils;
 import com.codetroopers.shakemytours.util.Strings;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -86,9 +89,11 @@ public class TripActivity extends AppCompatActivity implements GoogleApiClient.C
 
 
     public static final String PARAM_TRAVELS = "PARAM_TRAVELS";
+    public static final int PERMISSION_REQUEST_CODE = 12;
     private SparseArray<Bitmap> mMarkerList;
     private SparseArray<Integer> mAvailableColors;
     private ShareActionProvider mShareActionProvider;
+    private boolean mLocationAllowed;
 
     public static Intent newIntent(Context context, ArrayList<Travel> selectedTravels) {
         Intent intent = new Intent(context, TripActivity.class);
@@ -142,18 +147,12 @@ public class TripActivity extends AppCompatActivity implements GoogleApiClient.C
         mAvailableColors.put(4, getResources().getColor(R.color.map_marker_4));
     }
 
-    protected synchronized void buildGoogleApiClient() {
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .addApi(LocationServices.API)
-                .build();
-        mGoogleApiClient.connect();
-    }
 
     @Override
     protected void onStop() {
-        mGoogleApiClient.disconnect();
+        if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
+            mGoogleApiClient.disconnect();
+        }
         super.onStop();
     }
 
@@ -297,7 +296,9 @@ public class TripActivity extends AppCompatActivity implements GoogleApiClient.C
         // Gets to GoogleMap from the MapView and does initialization stuff
         map = mapView.getMap();
         if (map != null) {
-            map.setMyLocationEnabled(true);
+            if (mLocationAllowed) {
+                map.setMyLocationEnabled(true);
+            }
             map.getUiSettings().setMyLocationButtonEnabled(true);
 
             for (MarkerOptions marker : mapMarkerOptionsList) {
@@ -409,7 +410,6 @@ public class TripActivity extends AppCompatActivity implements GoogleApiClient.C
 
     @Override
     public void onConnected(Bundle bundle) {
-
         Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
         if (mLastLocation == null) {
             mLastKnownLatLng = new LatLng(47.400542, 0.685327);
@@ -417,6 +417,43 @@ public class TripActivity extends AppCompatActivity implements GoogleApiClient.C
             mLastKnownLatLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
         }
         initMap();
+    }
+
+
+    protected synchronized void buildGoogleApiClient() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (PermissionUtils.hasNotLocation(this)) {
+                PermissionUtils.askLocation(this, PERMISSION_REQUEST_CODE);
+            } else {
+                connectWithPermission();
+            }
+        } else {
+            connectWithPermission();
+        }
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == PERMISSION_REQUEST_CODE) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                connectWithPermission();
+            } else {
+                mLastKnownLatLng = new LatLng(47.400542, 0.685327);
+                initMap();
+            }
+        }
+    }
+
+    private void connectWithPermission() {
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
+        mGoogleApiClient.connect();
+        mLocationAllowed = true;
     }
 
     @Override
@@ -543,7 +580,7 @@ public class TripActivity extends AppCompatActivity implements GoogleApiClient.C
                 @Override
                 public void onClick(View v) {
                     CameraUpdate cameraInit = CameraUpdateFactory.newLatLngZoom(travel.toLatLng(), 15);
-                    if(map != null) {
+                    if (map != null) {
                         map.animateCamera(cameraInit);
                     }
                 }
