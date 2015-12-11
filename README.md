@@ -1,26 +1,27 @@
-## Material Android Bootstrap
+## ShakeMyTours Android Application
 
-This is a bootstrap to rapidly launch Android projects on API>14 with a material theme
+This app have been built during Startup Weenkend of Tours the 4,5,6 decembre 2015
 
-This bootstrap contains :
 
-* material theme with appcompat to API>14
-* new toolbar implementation
-* a drawer who respect the material guidelines (only on API21)
-* Dagger 2
-* ButterKnife
-* Picasso
-* Icepick
-* AutoParcel
-* Crashlytics
-* JUnit 4
-* Espresso
-* LeakCanary
-* Hugo
-* Retrolambda
+Wining First place of the StartupWeekend and special prize for best developpment.
 
-## Thanks
 
-This is inspired by this [article](http://antonioleiva.com/material-design-everywhere/), and this [stackoverflow post](http://stackoverflow.com/questions/26745300/navigation-drawer-semi-transparent-over-status-bar-not-working)
+As only on proof of concept the Android app is available on GooglePlay https://play.google.com/store/apps/details?id=com.codetroopers.shakemytours
+
+
+The ShakeMyTours team for the Startup Weekend was composed by :
+
+ * Thibault
+ * Cedric
+ * Florian
+ * Thanh
+ * Romain
+ * Vincent
+ * Margot
+ * Louis
+ * Nabil
+ * Claude
+ * Baptiste
+ * Sarah
 
 
