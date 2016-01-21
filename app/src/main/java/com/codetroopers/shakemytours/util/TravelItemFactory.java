@@ -25,7 +25,6 @@ public class TravelItemFactory {
     private static List<Travel> travelActivities;
     private static List<Travel> travelLunch;
     private static List<Travel> travelNight;
-    private static List<Travel> travelBonus;
 
     public static Travel getRandomFoodEvent(Context context, int i) {
         switch (i) {
@@ -70,10 +69,10 @@ public class TravelItemFactory {
     }
 
     public static Travel getMorning1(Context context) {
-        if (travelBonus == null) {
-            travelBonus = loadData(context, R.raw.bonus);
+        if (travelActivities == null) {
+            travelActivities = loadData(context, R.raw.activity);
         }
-        return getRandomItemFrom(travelBonus);
+        return getRandomItemFrom(travelActivities);
     }
 
     private static Travel getRandomItemFrom(List<Travel> travels) {
