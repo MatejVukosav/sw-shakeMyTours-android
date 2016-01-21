@@ -1,10 +1,24 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.codetroopers.shakemytours.ui.activity.HomeActivity">
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context="com.codetroopers.shakemytours.ui.activity.HomeActivity">
     <item
-        android:id="@+id/action_reset"
-        android:title="@string/action_reset"
+        android:id="@+id/menu_home_action_reset"
         android:orderInCategory="100"
-        app:showAsAction="never" />
+        android:title="@string/menu_home_action_reset"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/menu_home_action_city_tours"
+        android:checkable="true"
+        android:orderInCategory="100"
+        android:title="@string/menu_home_action_tours"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/menu_home_action_city_orleans"
+        android:checkable="true"
+        android:orderInCategory="100"
+        android:title="@string/menu_home_action_orleans"
+        app:showAsAction="never"/>
 </menu>

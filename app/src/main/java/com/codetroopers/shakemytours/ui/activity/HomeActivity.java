@@ -2,6 +2,7 @@ package com.codetroopers.shakemytours.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -11,6 +12,7 @@ import android.hardware.SensorManager;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.view.GravityCompat;
@@ -54,6 +56,9 @@ import hugo.weaving.DebugLog;
 
 @DebugLog
 public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter.OnItemClickListener, OnStartDragListener {
+    public static final String APP_PREF_CITY_TO_USE = "APP_PREF_CITY_TO_USE";
+    public static final int APP_PREF_CITY_ID_TOURS = 0;
+    public static final int APP_PREF_CITY_ID_ORELANS = 1;
 
     @Bind(R.id.drawer)
     DrawerLayout mDrawer;
@@ -353,7 +358,23 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
     public boolean onPrepareOptionsMenu(Menu menu) {
         // If the nav drawer is open, hide action items related to the content view
         boolean drawerOpen = mDrawer.isDrawerOpen(mDrawerList);
-        menu.findItem(R.id.action_reset).setVisible(!drawerOpen && !mTravelsDatas.isEmpty());
+        boolean menuItemVisible = !drawerOpen && !mTravelsDatas.isEmpty();
+        menu.findItem(R.id.menu_home_action_reset).setVisible(menuItemVisible);
+        MenuItem menuItemOrleans = menu.findItem(R.id.menu_home_action_city_orleans);
+        menuItemOrleans.setVisible(menuItemVisible);
+        MenuItem menuItemTours = menu.findItem(R.id.menu_home_action_city_tours);
+        menuItemTours.setVisible(menuItemVisible);
+        if (menuItemVisible) {
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+            int cityToUseId = prefs.getInt(APP_PREF_CITY_TO_USE, APP_PREF_CITY_ID_TOURS);
+            if (cityToUseId == APP_PREF_CITY_ID_TOURS) {
+                menuItemOrleans.setChecked(false);
+                menuItemTours.setChecked(true);
+            } else {
+                menuItemOrleans.setChecked(true);
+                menuItemTours.setChecked(false);
+            }
+        }
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -366,22 +387,41 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
             case android.R.id.home:
                 mDrawer.openDrawer(GravityCompat.START);
                 return true;
-            case R.id.action_reset:
-                mSelectedEvent = 0;
-                mTravelsDatas.clear();
-                mDrawerAdapter.notifyItemRangeRemoved(0, 5);
-                mRecyclerView.setVisibility(View.GONE);
-                mRecyclerView.scrollToPosition(0);
-                mTelImg.setVisibility(View.VISIBLE);
-                mShakeItTitle.setVisibility(View.VISIBLE);
-                mShakeItTitle.setAlpha(1);
-                mShakeItTitle.setText(R.string.shakeIt);
-                setFabVisible(false);
-                mDrawer.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                invalidateOptionsMenu();
+            case R.id.menu_home_action_reset:
+                resetShakeResult();
+                return true;
+            case R.id.menu_home_action_city_tours:
+                savePrefCity(APP_PREF_CITY_ID_TOURS);
+                item.setChecked(true);
+                resetShakeResult();
+                return true;
+            case R.id.menu_home_action_city_orleans:
+                item.setChecked(true);
+                savePrefCity(APP_PREF_CITY_ID_ORELANS);
+                resetShakeResult();
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void savePrefCity(int appPrefCityId) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        prefs.edit().putInt(APP_PREF_CITY_TO_USE, appPrefCityId).commit();
+    }
+
+    private void resetShakeResult() {
+        mSelectedEvent = 0;
+        mTravelsDatas.clear();
+        mDrawerAdapter.notifyItemRangeRemoved(0, 5);
+        mRecyclerView.setVisibility(View.GONE);
+        mRecyclerView.scrollToPosition(0);
+        mTelImg.setVisibility(View.VISIBLE);
+        mShakeItTitle.setVisibility(View.VISIBLE);
+        mShakeItTitle.setAlpha(1);
+        mShakeItTitle.setText(R.string.shakeIt);
+        setFabVisible(false);
+        mDrawer.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        invalidateOptionsMenu();
     }
 
     @Override
