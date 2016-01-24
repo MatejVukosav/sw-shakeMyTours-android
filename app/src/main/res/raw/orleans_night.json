@@ -1,0 +1,42 @@
+[
+  {
+    "name":"L'Astrolabe",
+    "eventType":"bar",
+    "address":"1 Rue Alexandre Avisse, 45000 Orléans",
+    "lat":"47.903181",
+    "lgt":1.893613,
+    "site":"lastrolabe.org",
+    "tel":"02 38 54 20 06",
+    "description":"L'Astrolabe est une salle de spectacle française, située à l'intérieur du complexe du Baron, sur le boulevard Jean-Jaurès d'Orléans dans le département du Loiret et la région Centre-Val de LoirSes deux salles, l'Astrolabe (550 places) et l'Astroclub (180 places), proposent environ 80 concerts de septembre à juin pour écouter des groupes locaux ou des artistes de renommée nationale et internationale.\n Deux mardis par mois, l'Astroclub s'ouvre aux initiatives culturelles locales (musique, expositions, vidéos, etc.) pour un rendez-vous gratuit, de 18h à 21h.\n En complément des concerts, l’Astrolabe accueille des artistes lors de résidences et organise des actions culturelles avec des nombreux partenaires."
+  },
+  {
+    "name":"Bonne Pioche",
+    "eventType":"bar",
+    "address":"204 Rue de Bourgogne, 45000 Orléans",
+    "lat":"47.900435",
+    "lgt":1.910228,
+    "site":"http://www.cafebonnepioche.com/",
+    "tel":"09 51 97 04 22",
+    "description":"Café/bar dédié aux jeux de société entre amis ou en famille. Cadre cosy, boissons artisanales et tartines gourmandes."
+  },
+  {
+    "name":"Mac Ewan'S",
+    "eventType":"bar",
+    "address":"250 Rue de Bourgogne, 45000 Orléans",
+    "lat":"47.900276",
+    "lgt":1.907732,
+    "site":"",
+    "tel":"02 38 54 65 70",
+    "description":"Un bon pub Irlandais au cœur de la rue de Bourgogne, avec une bonne ambiance. Un grand choix deboissson."
+  },
+  {
+    "name":"Le Petit Barcelone",
+    "eventType":"bar",
+    "address":"218 Rue de Bourgogne, 45000 Orléans",
+    "lat":"47.900326",
+    "lgt":1.909723,
+    "site":"",
+    "tel":"02 38 53 69 26",
+    "description":"Dans une ambiance conviviale, vous pourrez savourer un bon verre au Petit Barcelonne entouré de la jeunesse orléanaise tout en écoutant de la musique."
+  }
+]

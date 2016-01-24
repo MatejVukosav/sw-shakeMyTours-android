@@ -1,0 +1,102 @@
+[
+  {
+    "name":"Bateau Lavoir Orléans Chatelet",
+    "eventType":"resto",
+    "address":"1 Place du Châtelet, 45000 Orléans",
+    "lat":"47.897620",
+    "lgt":1.909295,
+    "site":"bateaulavoir-orleans.fr",
+    "tel":"02 38 88 93 23",
+    "description":"Le Bateau Lavoir Châtelet est un restaurant-bar salon de thé amarré quai Châtelet à ORLEANS. L’objectif visé par l’équipage est d’offrir un moment convivial basé sur la satisfaction du client et le plaisir partagé, un ressenti de «bien-être », de confort, une sensation de dépaysement au contact de la Loire et de son patrimoine."
+  },
+  {
+    "name":"Restaurant Les Terrasses de Loire",
+    "eventType":"bar",
+    "address":"1 Chemin de Halage, 45000 Orléans",
+    "lat":"47.900912",
+    "lgt":1.930965,
+    "site":"lesterrassesduborddeloire.com",
+    "tel":"02 38 53 45 98",
+    "description":"Dégustez les plaisirs d'une expérience culinaire de qualité et profitez d'un agréable moment de détente sur terrasse du Bord de Loire."
+  },
+  {
+    "name":"Chez Jules",
+    "eventType":"resto",
+    "address":"136 Rue de Bourgogne, 45000 Orléans",
+    "lat":"47.900694",
+    "lgt":1.912999,
+    "site":"chezjulesorleans.fr",
+    "tel":"02 38 54 30 80",
+    "description":"Isabelle et Yvan, Maitre Restaurateur, vous accueillent dans un décor entièrement rénové avec une cuisine généreuse et inventive, dans le quartier ancien proche de la cathédrale et des quais de Loire. Parkings proches (Charpenterie, Cathédrale, Campo Santo, Châtelet)."
+  },
+  {
+    "name":"Eugène",
+    "eventType":"resto",
+    "address":"24 Rue Sainte-Anne, 45000 Orléans",
+    "lat":"47.907520",
+    "lgt":1.905714,
+    "site":"restauranteugene.fr",
+    "tel":"02 38 53 82 64",
+    "description":"Un restaurant \"niché\" au cœur du centre ville d'Orléans où vous pourrez découvrir à la fois des saveurs méridionaleset régionales. Formule rapide le midi à moins de 20€. Repas en tête-à-tête ou vos déjeuners d'affaires et séminaires."
+  },
+  {
+    "name":"L'Ardoise",
+    "eventType":"resto",
+    "address":"27 Rue de la Bretonnerie, 45000 Orléans",
+    "lat":"47.904828",
+    "lgt":1.905514,
+    "site":"ardoise-orleans.com",
+    "tel":"02 38 53 51 66",
+    "description":"L'Ardoise est avant tout une histoire d'amitié et de passion commune. Jeremy et Thomas revisittent des recettes en ajoutant une pointe de folie. Laetitia vous accueille dans un décor à la fois chaleureux et tendance."
+  },
+  {
+    "name":"La Parenthèse",
+    "eventType":"resto",
+    "address":"26 Place du Châtelet, 45000 Orléans",
+    "lat":"47.899509",
+    "lgt":1.906806,
+    "site":"restaurant-la-parenthese.com",
+    "tel":"02 38 62 07 50",
+    "description":"Le restaurant la parenthèse vous propose une cuisine traditionnelle revisitée au goût du jour. La carte change tous les 2 mois pour mieux satisfaire les attentes de chacun."
+  },
+  {
+    "name":"La Terrasse du Parc",
+    "eventType":"resto",
+    "address":"Parc Floral de la Source, Avenue du Parc Floral, 45100 Orléans",
+    "lat":"47.847828",
+    "lgt":1.938223,
+    "site":"laterrasse45.com",
+    "tel":"02 38 25 92 24",
+    "description":"Sur une terrasse très agréable face au parc Floral. Pour vos déjeuners et dîners en exterieur ou dans la salle. Cuisine actuelle contemporaine avec des bases classiques."
+  },
+  {
+    "name":"Le lift",
+    "eventType":"resto",
+    "address":"5 Rue Poterne dans le jardin de la charpenterie avec vue panoramique sur la Loire, 45000 Orléans",
+    "lat":"47.898786",
+    "lgt":1.909115,
+    "site":"restaurant-le-lift.com",
+    "tel":"02 38 53 63 48",
+    "description":"Situé dans les jardins de la Charpenterie, avec vue sur la loire, terrasse avec vue imprenable, cadre design, cuisine actuelle respectant les saisons. Menu carte ou suggestion, venez découvrir les dernières créations du chef."
+  },
+  {
+    "name":"Le Pavillon Bleu",
+    "eventType":"bar",
+    "address":"351 Rue de la Reine Blanche, 45160 Olivet",
+    "lat":"47.869437",
+    "lgt":1.893085,
+    "site":"pavillonbleu-restaurant.com",
+    "tel":"02 38 66 14 30",
+    "description":"Site exceptionnel sur les bords du loiret. Terrasse sur le bord de l'eau. Possibilité de prendre l'apéritif sur le bateau du Pavillion Bleu"
+  },
+  {
+    "name":"Le XV",
+    "eventType":"resto",
+    "address":"2 Place du Châtelet, 45000 Orléans",
+    "lat":"47.898886",
+    "lgt":1.906492,
+    "site":"restaurantlexv.com",
+    "tel":"k",
+    "description":"Un lieu où se partagent l'amour du rugby et une bonne ambiance, le rapport qualité prix se constate dans nos assiètes, des produits frais préparés à la minute, la carte est renouvlée à chaque saison de façon créative."
+  }
+]
