@@ -81,7 +81,7 @@
   },
   {
     "name":"Le Pavillon Bleu",
-    "eventType":"bar",
+    "eventType":"resto",
     "address":"351 Rue de la Reine Blanche, 45160 Olivet",
     "lat":"47.869437",
     "lgt":1.893085,
@@ -96,7 +96,7 @@
     "lat":"47.898886",
     "lgt":1.906492,
     "site":"restaurantlexv.com",
-    "tel":"k",
+    "tel":"",
     "description":"Un lieu où se partagent l'amour du rugby et une bonne ambiance, le rapport qualité prix se constate dans nos assiètes, des produits frais préparés à la minute, la carte est renouvlée à chaque saison de façon créative."
   }
 ]

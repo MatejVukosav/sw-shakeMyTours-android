@@ -394,11 +394,13 @@ public class HomeActivity extends BaseActionBarActivity implements DrawerAdapter
                 savePrefCity(APP_PREF_CITY_ID_TOURS);
                 item.setChecked(true);
                 resetShakeResult();
+                TravelItemFactory.resetLists();
                 return true;
             case R.id.menu_home_action_city_orleans:
                 item.setChecked(true);
                 savePrefCity(APP_PREF_CITY_ID_ORELANS);
                 resetShakeResult();
+                TravelItemFactory.resetLists();
                 return true;
         }
         return super.onOptionsItemSelected(item);
