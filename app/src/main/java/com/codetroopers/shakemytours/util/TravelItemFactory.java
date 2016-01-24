@@ -70,7 +70,7 @@ public class TravelItemFactory {
 
     public static Travel getMorning1(Context context) {
         if (travelActivities == null) {
-            travelActivities = loadData(context, R.raw.activity);
+            travelActivities = loadData(context, R.raw.tours_activity);
         }
         return getRandomItemFrom(travelActivities);
     }
@@ -81,7 +81,7 @@ public class TravelItemFactory {
 
     public static Travel getMorning2(Context context) {
         if (travelActivities == null) {
-            travelActivities = loadData(context, R.raw.activity);
+            travelActivities = loadData(context, R.raw.tours_activity);
         }
         return getRandomItemFrom(travelActivities);
     }
@@ -89,21 +89,21 @@ public class TravelItemFactory {
 
     public static Travel getLunch(Context context) {
         if (travelLunch == null) {
-            travelLunch = loadData(context, R.raw.restaurant);
+            travelLunch = loadData(context, R.raw.tours_restaurant);
         }
         return getRandomItemFrom(travelLunch);
     }
 
     public static Travel getAfternoon1(Context context) {
         if (travelActivities == null) {
-            travelActivities = loadData(context, R.raw.activity);
+            travelActivities = loadData(context, R.raw.tours_activity);
         }
         return getRandomItemFrom(travelActivities);
     }
 
     public static Travel getAfternoon2(Context context) {
         if (travelNight == null) {
-            travelNight = loadData(context, R.raw.night);
+            travelNight = loadData(context, R.raw.tours_night);
         }
         return getRandomItemFrom(travelNight);
     }
