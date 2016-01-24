@@ -63,6 +63,8 @@ public class TravelDetailActivity extends AppCompatActivity {
     LinearLayout phoneLayout;
     @Bind(R.id.detail_travel_layout_site)
     LinearLayout siteLayout;
+    @Bind(R.id.detail_travel_description)
+    TextView descriptionText;
 
 
     public static Intent newIntent(Context context, Travel travel) {
@@ -114,6 +116,9 @@ public class TravelDetailActivity extends AppCompatActivity {
             locationLayout.setVisibility(View.GONE);
         } else {
             locationText.setText(travel.getAddress());
+        }
+        if (travel.description != null &&  !travel.description.equals("")) {
+            descriptionText.setText(travel.description);
         }
     }
 

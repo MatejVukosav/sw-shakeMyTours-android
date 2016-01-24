@@ -35,6 +35,8 @@ public class Travel implements Parcelable {
     public String longitude;
     @SerializedName("eventType")
     public String eventType;
+    @SerializedName("description")
+    public String description;
 
 
     public Travel() {
@@ -53,6 +55,7 @@ public class Travel implements Parcelable {
         latitude = in.readString();
         longitude = in.readString();
         eventType = in.readString();
+        description = in.readString();
     }
 
     public static final Creator<Travel> CREATOR = new Creator<Travel>() {
@@ -150,6 +153,7 @@ public class Travel implements Parcelable {
         dest.writeString(latitude);
         dest.writeString(longitude);
         dest.writeString(eventType);
+        dest.writeString(description);
     }
 
 

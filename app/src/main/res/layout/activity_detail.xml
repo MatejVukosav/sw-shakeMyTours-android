@@ -191,6 +191,7 @@
 
                         <TextView
                             style="@style/Text"
+                            android:id="@+id/detail_travel_description"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="10dp"
