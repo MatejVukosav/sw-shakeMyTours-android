@@ -158,6 +158,8 @@ public class TripActivity extends AppCompatActivity implements GoogleApiClient.C
 
     private void initMap() {
 
+        String mapKey = getString(R.string.google_api_key);
+
         String orgineCoord = "origin=" + mLastKnownLatLng.latitude + "," + mLastKnownLatLng.longitude;
         String destCoord = "destination=" + mTravels.get(mTravels.size() - 1).latitude + "," + mTravels.get(mTravels.size() - 1).longitude;
 
@@ -167,7 +169,7 @@ public class TripActivity extends AppCompatActivity implements GoogleApiClient.C
         }
         URL url = null;
         try {
-            url = new URL("https://maps.googleapis.com/maps/api/directions/json?" + orgineCoord + "&" + destCoord + "&" + waypoints + "&key=AIzaSyAHPXTD5kFmDX7YzkzLPTk0hOvmEKOITz4");
+            url = new URL("https://maps.googleapis.com/maps/api/directions/json?" + orgineCoord + "&" + destCoord + "&" + waypoints + "&key=" + mapKey);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }

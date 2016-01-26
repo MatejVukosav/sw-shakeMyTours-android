@@ -21,9 +21,10 @@
     <color name="windowBackgroundColor">#FAFAFA</color>
     <color name="statusBarTransparentColor">@color/colorPrimary</color>
     <color name="safe_mode_text">#80ffffff</color>
-    <color name="map_marker_0">#FF9800</color>
-    <color name="map_marker_1">#8BC34A</color>
-    <color name="map_marker_2">#673AB7</color>
-    <color name="map_marker_3">#FFEB3B</color>
-    <color name="map_marker_4">#FF5722</color>
+
+    <color name="map_marker_0">#e91e63</color>
+    <color name="map_marker_1">#29b6f6</color>
+    <color name="map_marker_2">#f3e5f5</color>
+    <color name="map_marker_3">#81d4fa</color>
+    <color name="map_marker_4">#f48fb1</color>
 </resources>

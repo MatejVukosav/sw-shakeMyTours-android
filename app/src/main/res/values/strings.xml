@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">ShakeMyTours</string>
+    <string name="google_api_key">AIzaSyAHPXTD5kFmDX7YzkzLPTk0hOvmEKOITz4</string>
     <string name="title_activity_home">Home</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
