@@ -46,7 +46,12 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.ViewHolder
                 break;
         }
         viewHolder.name.setText(title);
-        viewHolder.name.setOnClickListener(v -> mListener.onClick(v, position));
+        viewHolder.name.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.onClick(v, position);
+            }
+        });
         viewHolder.itemView.setActivated(position == mSelectedItem);
     }
 
